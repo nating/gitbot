@@ -1,0 +1,56 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>Bot Application</Name>
+    <Description>Template to build a bot application for Microsoft Bot Framework</Description>
+    <ProjectType>CSharp</ProjectType>
+    <ProjectSubType>
+    </ProjectSubType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>Bot Application</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <Icon>__TemplateIcon.png</Icon>
+    <PreviewImage>__PreviewImage.png</PreviewImage>
+  </TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="Bot Application.csproj" File="Bot Application.csproj" ReplaceParameters="true">
+      <Folder Name="App_Start" TargetFolderName="App_Start">
+        <ProjectItem ReplaceParameters="true" TargetFileName="WebApiConfig.cs">WebApiConfig.cs</ProjectItem>
+      </Folder>
+      <Folder Name="Controllers" TargetFolderName="Controllers">
+        <ProjectItem ReplaceParameters="true" TargetFileName="MessagesController.cs">MessagesController.cs</ProjectItem>
+      </Folder>
+      <ProjectItem ReplaceParameters="true" TargetFileName="default.htm">default.htm</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Global.asax">Global.asax</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Global.asax.cs">Global.asax.cs</ProjectItem>
+      <Folder Name="Properties" TargetFolderName="Properties">
+        <ProjectItem ReplaceParameters="true" TargetFileName="AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
+      </Folder>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Web.config">Web.config</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Web.Debug.config">Web.Debug.config</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Web.Release.config">Web.Release.config</ProjectItem>
+    </Project>
+  </TemplateContent>
+  <WizardExtension>
+    <Assembly>NuGet.VisualStudio.Interop, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</Assembly>
+    <FullClassName>NuGet.VisualStudio.TemplateWizard</FullClassName>
+  </WizardExtension>
+  <WizardData>
+    <packages repository="template">
+        <package id="Autofac" version="3.5.2" targetFramework="net46" />
+        <package id="Chronic.Signed" version="0.3.2" targetFramework="net46" />
+        <package id="Microsoft.AspNet.WebApi" version="5.2.3" targetFramework="net46" />
+        <package id="Microsoft.AspNet.WebApi.Client" version="5.2.3" targetFramework="net46" />
+        <package id="Microsoft.AspNet.WebApi.Core" version="5.2.3" targetFramework="net46" />
+        <package id="Microsoft.AspNet.WebApi.WebHost" version="5.2.3" targetFramework="net46" />
+        <package id="Microsoft.Bot.Builder" version="3.0.0.0" targetFramework="net46" />
+        <package id="Microsoft.IdentityModel.Protocol.Extensions" version="1.0.2.206221351" targetFramework="net46" />      
+        <package id="Microsoft.Rest.ClientRuntime" version="1.8.2" targetFramework="net46" />
+        <package id="Microsoft.WindowsAzure.ConfigurationManager" version="3.1.0" targetFramework="net46" />
+        <package id="Newtonsoft.Json" version="8.0.3" targetFramework="net46" />
+        <package id="System.IdentityModel.Tokens.Jwt" version="4.0.2.206221351" targetFramework="net46" />
+    </packages>
+  </WizardData>   
+</VSTemplate>
