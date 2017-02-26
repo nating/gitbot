@@ -37,3 +37,45 @@ C:\Users\Yasir\Desktop\bot\Bot Application1\Bot Application1\bin\zh-hans\Microso
 C:\Users\Yasir\Desktop\bot\Bot Application1\Bot Application1\obj\Debug\Bot Application1.csprojResolveAssemblyReference.cache
 C:\Users\Yasir\Desktop\bot\Bot Application1\Bot Application1\obj\Debug\Bot Application1.dll
 C:\Users\Yasir\Desktop\bot\Bot Application1\Bot Application1\obj\Debug\Bot Application1.pdb
+U:\GitBot\gitbot\Bot Application1\bin\Bot Application1.dll.config
+U:\GitBot\gitbot\Bot Application1\bin\Bot Application1.dll
+U:\GitBot\gitbot\Bot Application1\bin\Bot Application1.pdb
+U:\GitBot\gitbot\Bot Application1\bin\Autofac.dll
+U:\GitBot\gitbot\Bot Application1\bin\Chronic.dll
+U:\GitBot\gitbot\Bot Application1\bin\Microsoft.Bot.Builder.dll
+U:\GitBot\gitbot\Bot Application1\bin\Microsoft.Bot.Connector.dll
+U:\GitBot\gitbot\Bot Application1\bin\Microsoft.IdentityModel.Protocol.Extensions.dll
+U:\GitBot\gitbot\Bot Application1\bin\Microsoft.Rest.ClientRuntime.dll
+U:\GitBot\gitbot\Bot Application1\bin\Microsoft.WindowsAzure.Configuration.dll
+U:\GitBot\gitbot\Bot Application1\bin\Newtonsoft.Json.dll
+U:\GitBot\gitbot\Bot Application1\bin\System.IdentityModel.Tokens.Jwt.dll
+U:\GitBot\gitbot\Bot Application1\bin\System.Net.Http.Formatting.dll
+U:\GitBot\gitbot\Bot Application1\bin\System.Web.Http.dll
+U:\GitBot\gitbot\Bot Application1\bin\System.Web.Http.WebHost.dll
+U:\GitBot\gitbot\Bot Application1\bin\Autofac.xml
+U:\GitBot\gitbot\Bot Application1\bin\Microsoft.Bot.Builder.xml
+U:\GitBot\gitbot\Bot Application1\bin\Microsoft.Bot.Connector.xml
+U:\GitBot\gitbot\Bot Application1\bin\Microsoft.IdentityModel.Protocol.Extensions.pdb
+U:\GitBot\gitbot\Bot Application1\bin\Microsoft.IdentityModel.Protocol.Extensions.xml
+U:\GitBot\gitbot\Bot Application1\bin\Microsoft.Rest.ClientRuntime.xml
+U:\GitBot\gitbot\Bot Application1\bin\Microsoft.WindowsAzure.Configuration.xml
+U:\GitBot\gitbot\Bot Application1\bin\Newtonsoft.Json.xml
+U:\GitBot\gitbot\Bot Application1\bin\System.IdentityModel.Tokens.Jwt.pdb
+U:\GitBot\gitbot\Bot Application1\bin\System.IdentityModel.Tokens.Jwt.xml
+U:\GitBot\gitbot\Bot Application1\bin\System.Net.Http.Formatting.xml
+U:\GitBot\gitbot\Bot Application1\bin\System.Web.Http.xml
+U:\GitBot\gitbot\Bot Application1\bin\System.Web.Http.WebHost.xml
+U:\GitBot\gitbot\Bot Application1\bin\ar\Microsoft.Bot.Builder.resources.dll
+U:\GitBot\gitbot\Bot Application1\bin\en\Microsoft.Bot.Builder.resources.dll
+U:\GitBot\gitbot\Bot Application1\bin\es\Microsoft.Bot.Builder.resources.dll
+U:\GitBot\gitbot\Bot Application1\bin\fa\Microsoft.Bot.Builder.resources.dll
+U:\GitBot\gitbot\Bot Application1\bin\fr\Microsoft.Bot.Builder.resources.dll
+U:\GitBot\gitbot\Bot Application1\bin\ja\Microsoft.Bot.Builder.resources.dll
+U:\GitBot\gitbot\Bot Application1\bin\ru\Microsoft.Bot.Builder.resources.dll
+U:\GitBot\gitbot\Bot Application1\bin\zh-hans\Microsoft.Bot.Builder.resources.dll
+U:\GitBot\gitbot\Bot Application1\obj\Debug\Bot Application1.csprojResolveAssemblyReference.cache
+U:\GitBot\gitbot\Bot Application1\obj\Debug\Bot Application1.dll
+U:\GitBot\gitbot\Bot Application1\obj\Debug\Bot Application1.pdb
+U:\GitBot\gitbot\Bot Application1\bin\Octokit.dll
+U:\GitBot\gitbot\Bot Application1\bin\Octokit.pdb
+U:\GitBot\gitbot\Bot Application1\bin\Octokit.xml
