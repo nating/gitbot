@@ -40,35 +40,134 @@ namespace Bot_Application1
                 var intent = "";
                 if (activity.Text.Contains("biography"))
                 {
-                    intent = "biography";
+                    intent = "biographyOfUser";
                 }
                 else if (activity.Text.Contains("followers"))
                 {
-                    intent = "noOfFollowers";
+                    intent = "noOfFollowersForAUser";
+                }
+                else if (activity.Text.Contains("test"))
+                {
+                    //For now, put the intent you are testing in here! :)
+                    intent = "";
                 }
 
                 var github = new GitHubClient(new ProductHeaderValue("GitBot"));
                 var gitbotResponse = "";
+
+                // Initialise variables for GitHub Queries
+                //var number = hasNumber(json)? getNumber(json) : "";
+                //var username = hasUser(json) ? getUser(json) : "";
+                //var repoOwner = hasRepo(json) ? getRepoOwner(json) : "";
+                //var repoName = hasRepo(json) ? getRepoName) ; "";
+
+                //Hardcoded test parameters for GitHub Querying
+                var number = 4;
+                var username = "nating";
+                var repoOwner = "nating";
+                var repoName = "gitbot";
+
+                var theRepo = github.Repository.Get("nating","gitbot");
 
                 /*---------------------------------SWITCH ON INTENT----------------------------------------*/
 
                 //Switch on intent of message to get different data from github
                 switch (intent)
                 {
-                    case "biography":
+                    case "lastPersonToCommitOnRepo":
                         {
-                            //var username = params[0];
-                            var username = "nating";
+                            var user = "";
+                            gitbotResponse = ($"The last person to commit on {repoOwner}/{repoName} was {user}");
+                        }
+                        break;
+                    case "totalNumberOfCommitsOnRepo":
+                        {
+                            var total = "";
+                            gitbotResponse = ($"There has been {total} commits on {repoOwner}/{repoName} in total.");
+                        }
+                        break;
+                    case "numberOfFilesOnRepo":
+                        {
+                            var total = "";
+                            gitbotResponse = ($"There are {total} files in {repoOwner}/{repoName}.");
+                        }
+                        break;
+                    case "numberOfContributorsOnRepo":
+                        {
+                            var total = "";
+                            gitbotResponse = ($"{repoOwner}/{repoName} has {total} contributors.");
+                        }
+                        break;
+                    case "timeOfLastCommitOnRepo":
+                        {
+                            var time = "";
+                            gitbotResponse = ($"The last commit on {repoOwner}/{repoName} was made at {time}.");
+                        }
+                        break;
+                    case "lastNumberOfCommitsOnRepo":
+                        {
+                            var commits = "";
+                            gitbotResponse = ($"Here are the last {number} commits on {repoOwner}/{repoName}:{commits}");
+                        }
+                        break;
+                    case "usersLastCommitOnRepo":
+                        {
+                            var commit = "";
+                            gitbotResponse = ($"The last commit made by {username} on {repoOwner}/{repoName} was: {commit}");
+                        }
+                        break;
+                    case "timeOfUsersLastCommitOnRepo":
+                        {
+                            var time = "";
+                            gitbotResponse = ($"{time} is when {username} last commited on {repoOwner}/{repoName}.");
+                        }
+                        break;
+                    case "numberOfCommitsByUserOnRepo":
+                        {
+                            var total = "";
+                            gitbotResponse = ($"{username} has made {total} commits on {repoOwner}/{repoName}.");
+                        }
+                        break;
+                    case "lastNumberOfCommitsByUser":
+                        {
+                            var commits = "";
+                            gitbotResponse = ($"Here are the last {number} commits by {username} on {repoOwner}/{repoName}:{commits}.");
+                        }
+                        break;
+                    case "biographyOfUser":
+                        {
                             var user = await github.User.Get(username);
                             gitbotResponse = ($"{username}'s bio is \"{user.Bio}\".");
                         }
                         break;
-                    case "noOfFollowers":
+                    case "usersEmailAddress":
                         {
-                            //var username = params[0];
-                            var username = "nating";
-                            var user = await github.User.Get("nating");
+                            var user = await github.User.Get(username);
+                            gitbotResponse = ($"{username}'s email address is \"{user.Email}\".");
+                        }
+                        break;
+                    case "usersName":
+                        {
+                            var user = await github.User.Get(username);
+                            gitbotResponse = ($"{username}'s name is \"{user.Name}\".");
+                        }
+                        break;
+                    case "usersLocation":
+                        {
+                            var user = await github.User.Get(username);
+                            gitbotResponse = ($"{username}'s location is \"{user.Location}\".");
+                        }
+                        break;
+                    case "noOfFollowersForAUser":
+                        {
+                            var user = await github.User.Get(username);
                             gitbotResponse = ($"{username} has {user.Followers} followers.");
+                        }
+                        break;
+                    case "noOfUsersAUserIsFollowing":
+                        {
+                            var user = await github.User.Get(username);
+                            gitbotResponse = ($"{username} is following {user.Following} users.");
                         }
                         break;
                     default:
@@ -82,7 +181,7 @@ namespace Bot_Application1
                 /*-----------------------------------RESPOND TO CLIENT-------------------------------------*/
 
                 // Return our reply to the user
-                Microsoft.Bot.Connector.Activity reply = activity.CreateReply($"{gitbotResponse}");
+                Microsoft.Bot.Connector.Activity reply = activity.CreateReply($"You said to me:\"{activity.Text}\". \n\n My response is:\"{gitbotResponse}\"");
                 await connector.Conversations.ReplyToActivityAsync(reply);
             }
             else
