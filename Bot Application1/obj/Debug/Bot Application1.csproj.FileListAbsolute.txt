@@ -1,0 +1,39 @@
+\\tholos.itserv.scss.tcd.ie\ugrad\nating\documents\visual studio 2015\Projects\Bot Application1\Bot Application1\bin\Bot Application1.dll.config
+\\tholos.itserv.scss.tcd.ie\ugrad\nating\documents\visual studio 2015\Projects\Bot Application1\Bot Application1\bin\Bot Application1.dll
+\\tholos.itserv.scss.tcd.ie\ugrad\nating\documents\visual studio 2015\Projects\Bot Application1\Bot Application1\bin\Bot Application1.pdb
+\\tholos.itserv.scss.tcd.ie\ugrad\nating\documents\visual studio 2015\Projects\Bot Application1\Bot Application1\bin\Autofac.dll
+\\tholos.itserv.scss.tcd.ie\ugrad\nating\documents\visual studio 2015\Projects\Bot Application1\Bot Application1\bin\Chronic.dll
+\\tholos.itserv.scss.tcd.ie\ugrad\nating\documents\visual studio 2015\Projects\Bot Application1\Bot Application1\bin\Microsoft.Bot.Builder.dll
+\\tholos.itserv.scss.tcd.ie\ugrad\nating\documents\visual studio 2015\Projects\Bot Application1\Bot Application1\bin\Microsoft.Bot.Connector.dll
+\\tholos.itserv.scss.tcd.ie\ugrad\nating\documents\visual studio 2015\Projects\Bot Application1\Bot Application1\bin\Microsoft.IdentityModel.Protocol.Extensions.dll
+\\tholos.itserv.scss.tcd.ie\ugrad\nating\documents\visual studio 2015\Projects\Bot Application1\Bot Application1\bin\Microsoft.Rest.ClientRuntime.dll
+\\tholos.itserv.scss.tcd.ie\ugrad\nating\documents\visual studio 2015\Projects\Bot Application1\Bot Application1\bin\Microsoft.WindowsAzure.Configuration.dll
+\\tholos.itserv.scss.tcd.ie\ugrad\nating\documents\visual studio 2015\Projects\Bot Application1\Bot Application1\bin\Newtonsoft.Json.dll
+\\tholos.itserv.scss.tcd.ie\ugrad\nating\documents\visual studio 2015\Projects\Bot Application1\Bot Application1\bin\System.IdentityModel.Tokens.Jwt.dll
+\\tholos.itserv.scss.tcd.ie\ugrad\nating\documents\visual studio 2015\Projects\Bot Application1\Bot Application1\bin\System.Net.Http.Formatting.dll
+\\tholos.itserv.scss.tcd.ie\ugrad\nating\documents\visual studio 2015\Projects\Bot Application1\Bot Application1\bin\System.Web.Http.dll
+\\tholos.itserv.scss.tcd.ie\ugrad\nating\documents\visual studio 2015\Projects\Bot Application1\Bot Application1\bin\System.Web.Http.WebHost.dll
+\\tholos.itserv.scss.tcd.ie\ugrad\nating\documents\visual studio 2015\Projects\Bot Application1\Bot Application1\bin\Autofac.xml
+\\tholos.itserv.scss.tcd.ie\ugrad\nating\documents\visual studio 2015\Projects\Bot Application1\Bot Application1\bin\Microsoft.Bot.Builder.xml
+\\tholos.itserv.scss.tcd.ie\ugrad\nating\documents\visual studio 2015\Projects\Bot Application1\Bot Application1\bin\Microsoft.Bot.Connector.xml
+\\tholos.itserv.scss.tcd.ie\ugrad\nating\documents\visual studio 2015\Projects\Bot Application1\Bot Application1\bin\Microsoft.IdentityModel.Protocol.Extensions.pdb
+\\tholos.itserv.scss.tcd.ie\ugrad\nating\documents\visual studio 2015\Projects\Bot Application1\Bot Application1\bin\Microsoft.IdentityModel.Protocol.Extensions.xml
+\\tholos.itserv.scss.tcd.ie\ugrad\nating\documents\visual studio 2015\Projects\Bot Application1\Bot Application1\bin\Microsoft.Rest.ClientRuntime.xml
+\\tholos.itserv.scss.tcd.ie\ugrad\nating\documents\visual studio 2015\Projects\Bot Application1\Bot Application1\bin\Microsoft.WindowsAzure.Configuration.xml
+\\tholos.itserv.scss.tcd.ie\ugrad\nating\documents\visual studio 2015\Projects\Bot Application1\Bot Application1\bin\Newtonsoft.Json.xml
+\\tholos.itserv.scss.tcd.ie\ugrad\nating\documents\visual studio 2015\Projects\Bot Application1\Bot Application1\bin\System.IdentityModel.Tokens.Jwt.pdb
+\\tholos.itserv.scss.tcd.ie\ugrad\nating\documents\visual studio 2015\Projects\Bot Application1\Bot Application1\bin\System.IdentityModel.Tokens.Jwt.xml
+\\tholos.itserv.scss.tcd.ie\ugrad\nating\documents\visual studio 2015\Projects\Bot Application1\Bot Application1\bin\System.Net.Http.Formatting.xml
+\\tholos.itserv.scss.tcd.ie\ugrad\nating\documents\visual studio 2015\Projects\Bot Application1\Bot Application1\bin\System.Web.Http.xml
+\\tholos.itserv.scss.tcd.ie\ugrad\nating\documents\visual studio 2015\Projects\Bot Application1\Bot Application1\bin\System.Web.Http.WebHost.xml
+\\tholos.itserv.scss.tcd.ie\ugrad\nating\documents\visual studio 2015\Projects\Bot Application1\Bot Application1\bin\ar\Microsoft.Bot.Builder.resources.dll
+\\tholos.itserv.scss.tcd.ie\ugrad\nating\documents\visual studio 2015\Projects\Bot Application1\Bot Application1\bin\en\Microsoft.Bot.Builder.resources.dll
+\\tholos.itserv.scss.tcd.ie\ugrad\nating\documents\visual studio 2015\Projects\Bot Application1\Bot Application1\bin\es\Microsoft.Bot.Builder.resources.dll
+\\tholos.itserv.scss.tcd.ie\ugrad\nating\documents\visual studio 2015\Projects\Bot Application1\Bot Application1\bin\fa\Microsoft.Bot.Builder.resources.dll
+\\tholos.itserv.scss.tcd.ie\ugrad\nating\documents\visual studio 2015\Projects\Bot Application1\Bot Application1\bin\fr\Microsoft.Bot.Builder.resources.dll
+\\tholos.itserv.scss.tcd.ie\ugrad\nating\documents\visual studio 2015\Projects\Bot Application1\Bot Application1\bin\ja\Microsoft.Bot.Builder.resources.dll
+\\tholos.itserv.scss.tcd.ie\ugrad\nating\documents\visual studio 2015\Projects\Bot Application1\Bot Application1\bin\ru\Microsoft.Bot.Builder.resources.dll
+\\tholos.itserv.scss.tcd.ie\ugrad\nating\documents\visual studio 2015\Projects\Bot Application1\Bot Application1\bin\zh-hans\Microsoft.Bot.Builder.resources.dll
+\\tholos.itserv.scss.tcd.ie\ugrad\nating\documents\visual studio 2015\Projects\Bot Application1\Bot Application1\obj\Debug\Bot Application1.csprojResolveAssemblyReference.cache
+\\tholos.itserv.scss.tcd.ie\ugrad\nating\documents\visual studio 2015\Projects\Bot Application1\Bot Application1\obj\Debug\Bot Application1.dll
+\\tholos.itserv.scss.tcd.ie\ugrad\nating\documents\visual studio 2015\Projects\Bot Application1\Bot Application1\obj\Debug\Bot Application1.pdb
