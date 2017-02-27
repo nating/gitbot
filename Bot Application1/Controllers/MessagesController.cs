@@ -7,6 +7,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using Microsoft.Bot.Connector;
 using Newtonsoft.Json;
+using Octokit;
 
 namespace Bot_Application1
 {
@@ -17,16 +18,71 @@ namespace Bot_Application1
         /// POST: api/Messages
         /// Receive a message from a user and reply to it
         /// </summary>
-        public async Task<HttpResponseMessage> Post([FromBody]Activity activity)
+        public async Task<HttpResponseMessage> Post([FromBody]Microsoft.Bot.Connector.Activity activity)
         {
             if (activity.Type == ActivityTypes.Message)
             {
                 ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
-                // calculate something for us to return
-                int length = (activity.Text ?? string.Empty).Length;
 
-                // return our reply to the user
-                Activity reply = activity.CreateReply($"You sent {activity.Text} which was {length} characters. WEll done!");
+                /*--------------------------------------LUIS-----------------------------------------------*/
+
+                // Send message off to LUIS
+                // var json = sendToLUIS(activity.Text);
+
+                /*--------------------------------PARSE LUIS' RESPONSE-------------------------------------*/
+
+                // Create response based on interpretation from LUIS
+                // var intent = parseIntent(json);
+                // var score = parseScore(json);
+                // var params = parseParams(json);
+
+                // Sample decoding of message while LUIS not up and running
+                var intent = "";
+                if (activity.Text.Contains("biography"))
+                {
+                    intent = "biography";
+                }
+                else if (activity.Text.Contains("followers"))
+                {
+                    intent = "noOfFollowers";
+                }
+
+                var github = new GitHubClient(new ProductHeaderValue("GitBot"));
+                var gitbotResponse = "";
+
+                /*---------------------------------SWITCH ON INTENT----------------------------------------*/
+
+                //Switch on intent of message to get different data from github
+                switch (intent)
+                {
+                    case "biography":
+                        {
+                            //var username = params[0];
+                            var username = "nating";
+                            var user = await github.User.Get(username);
+                            gitbotResponse = ($"{username}'s bio is \"{user.Bio}\".");
+                        }
+                        break;
+                    case "noOfFollowers":
+                        {
+                            //var username = params[0];
+                            var username = "nating";
+                            var user = await github.User.Get("nating");
+                            gitbotResponse = ($"{username} has {user.Followers} followers.");
+                        }
+                        break;
+                    default:
+                        {
+                            gitbotResponse = ("I'm sorry, I don't know what you're asking me for!");
+                        }
+                        break;
+
+                }
+
+                /*-----------------------------------RESPOND TO CLIENT-------------------------------------*/
+
+                // Return our reply to the user
+                Microsoft.Bot.Connector.Activity reply = activity.CreateReply($"{gitbotResponse}");
                 await connector.Conversations.ReplyToActivityAsync(reply);
             }
             else
@@ -37,7 +93,7 @@ namespace Bot_Application1
             return response;
         }
 
-        private Activity HandleSystemMessage(Activity message)
+        private Microsoft.Bot.Connector.Activity HandleSystemMessage(Microsoft.Bot.Connector.Activity message)
         {
             if (message.Type == ActivityTypes.DeleteUserData)
             {
