@@ -7,8 +7,8 @@ The LUIS Model column describes which LUIS Model the question is sent to to dete
 
 |Questions											                |LUIS Model	|Code Written	
 |-----------------------------------------------|-----------|------------
-|What was the last commit on <repo>?				    |			      |❌
-|How many total commits are there on <repo>?		|			      |❌
+|What was the last commit on `<repo>`?				    |			      |❌
+|How many total commits are there on `<repo>`?		|			      |❌
 |How many files are in <repo>?						      |			      |❌
 |How many contributors does <repo> have?			  |			      |❌
 |When was the last commit on <repo>?				    |			      |❌
