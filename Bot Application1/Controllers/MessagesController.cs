@@ -26,8 +26,20 @@ namespace Bot_Application1
 
                 /*--------------------------------------LUIS-----------------------------------------------*/
 
-                // Send message off to LUIS
-                // var json = sendToLUIS(activity.Text);
+                var query = Uri.EscapeDataString(activity.Text);
+                using (HttpClient client = new HttpClient())
+                {
+                    string RequestURI = "https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/b17d6663-6ed9-40aa-98f1-49a8167fbf31?subscription-key=0b6cd41f07b2459389272439c1ee757a&q=" + query;
+                    HttpResponseMessage msg = await client.GetAsync(RequestURI);
+
+                    //if (msg.IsSuccessStatusCode)
+                    // {
+                    var luisJson = await msg.Content.ReadAsStringAsync();
+                    //Microsoft.Bot.Connector.Activity reply = activity.CreateReply($"Here's the JSON data response from LUIS: \n{JsonDataResponse}");
+                    //await connector.Conversations.ReplyToActivityAsync(reply);
+
+                    //}
+                }
 
                 /*--------------------------------PARSE LUIS' RESPONSE-------------------------------------*/
 
