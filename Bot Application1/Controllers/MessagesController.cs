@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Microsoft.Bot.Connector;
-using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Octokit;
 
 namespace Bot_Application1
@@ -24,7 +24,9 @@ namespace Bot_Application1
             {
                 ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
 
-                /*--------------------------------------LUIS-----------------------------------------------*/
+                /*-----------------------------------ASK LUIS-----------------------------------------------*/
+
+                var luisText = "";
 
                 var query = Uri.EscapeDataString(activity.Text);
                 using (HttpClient client = new HttpClient())
@@ -32,21 +34,24 @@ namespace Bot_Application1
                     string RequestURI = "https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/b17d6663-6ed9-40aa-98f1-49a8167fbf31?subscription-key=0b6cd41f07b2459389272439c1ee757a&q=" + query;
                     HttpResponseMessage msg = await client.GetAsync(RequestURI);
 
-                    //if (msg.IsSuccessStatusCode)
-                    // {
-                    var luisJson = await msg.Content.ReadAsStringAsync();
-                    //Microsoft.Bot.Connector.Activity reply = activity.CreateReply($"Here's the JSON data response from LUIS: \n{JsonDataResponse}");
-                    //await connector.Conversations.ReplyToActivityAsync(reply);
-
-                    //}
+                    if ((int)msg.StatusCode==200)
+                    {
+                        luisText = await msg.Content.ReadAsStringAsync();
+                    }
+                    else
+                    {
+                        Microsoft.Bot.Connector.Activity r = activity.CreateReply($"Sorry I'm having trouble connecting to my Language Understanding Cortex! :(");
+                        await connector.Conversations.ReplyToActivityAsync(r);
+                        return Request.CreateResponse(HttpStatusCode.InternalServerError);
+                    }
                 }
 
-                /*--------------------------------PARSE LUIS' RESPONSE-------------------------------------*/
+                /*--------------------------------PARSE LUIS------------------------------------------------*/
 
-                // Create response based on interpretation from LUIS
-                // var intent = parseIntent(json);
-                // var score = parseScore(json);
-                // var params = parseParams(json);
+                //var intent = getIntent(luisText);
+                //var user = getUser(luisText);
+                //var repo = getRepo(luisText);
+                //var number = getNumber(luisText);
 
                 // Sample decoding of message while LUIS not up and running
                 var intent = "";
@@ -64,24 +69,19 @@ namespace Bot_Application1
                     intent = "numberOfContributors";
                 }
 
-                var github = new GitHubClient(new ProductHeaderValue("GitBot"));
-                var gitbotResponse = "";
-
-                // Initialise variables for GitHub Queries
-                //var number = hasNumber(json)? getNumber(json) : "";
-                //var username = hasUser(json) ? getUser(json) : "";
-                //var repoOwner = hasRepo(json) ? getRepoOwner(json) : "";
-                //var repoName = hasRepo(json) ? getRepoName) ; "";
-
                 //Hardcoded test parameters for GitHub Querying
                 var number = 4;
                 var username = "nating";
                 var repoOwner = "nating";
                 var repoName = "gitbot";
 
+                var github = new GitHubClient(new ProductHeaderValue("GitBot"));
+                var gitbotResponse = "";
+
                 var theRepo = github.Repository.Get("nating","gitbot");
 
                 /*---------------------------------SWITCH ON INTENT----------------------------------------*/
+
 
                 //Switch on intent of message to get different data from github
                 switch (intent)
@@ -265,6 +265,16 @@ namespace Bot_Application1
             }
 
             return null;
+        }
+
+        private string getIntent(string luisText)
+        {
+            JObject luisJson = new JObject(luisText);
+            //if ()
+            {
+
+            }
+            return "";
         }
     }
 }
