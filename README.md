@@ -1,6 +1,6 @@
 # GitBot - The GitHub Chatbot
 
-<img src="gitbot/assets/gitbot-black.png" width="100">
+<img src="https://github.com/nating/gitbot/blob/master/assets/gitbot-black.png" width="100">
 
 GitBot is a chatbot that is able to answer questions about information from GitHub.
 
@@ -18,4 +18,4 @@ GitBot is a chatbot built with the [Microsoft Bot Framework](https://dev.botfram
 
 The Bot Framework connects GitBot to all of the supported messaging platforms. When a message is sent to GitBot from one of the messaging platforms, it goes to his endpoint on Azure. GitBot sends any messages he recieves to [Microsoft's Language Understanding Intelligence Service](https://www.microsoft.com/cognitive-services/en-us/language-understanding-intelligent-service-luis) to understand the intent of the message. When GitBot knows the intent of the message, he asks for the relevant data from GitHub. When the data is recieved from GitHub, GitBot sends his response back to the user.  
 
-<img src="gitbot/assets/gitbot-explanation.png" width="600">
+<img src="https://github.com/nating/gitbot/blob/master/assets/gitbot-explanation.png" width="600">
