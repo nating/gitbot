@@ -49,7 +49,7 @@ namespace Bot_Application1
                 else if (activity.Text.Contains("test"))
                 {
                     //For now, put the intent you are testing in here! :)
-                    intent = "LastCommitMessage";
+                    intent = "numberOfContributors";
                 }
 
                 var github = new GitHubClient(new ProductHeaderValue("GitBot"));
@@ -78,12 +78,6 @@ namespace Bot_Application1
                         {
                             var commits = await github.Repository.Commit.Get("nating", "gitbot", "master");
                             gitbotResponse = ($"{commits.Commit.Message}");
-                        }
-                        break;
-                    case "TotalCommits":
-                        {
-                            var commits = await github.Repository.Commit.Get("nating", "gitbot", "master");
-                            gitbotResponse = ($"{commits.Commit.Repository}");
                         }
                         break;
                     case "LastCommitTime":
