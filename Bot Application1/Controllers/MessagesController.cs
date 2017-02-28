@@ -67,11 +67,7 @@ namespace Bot_Application1
                 else if (activity.Text.Contains("test"))
                 {
                     //For now, put the intent you are testing in here! :)
-//<<<<<<< HEAD
-                    intent = "totalNumberOfCommitsOnRepo";
-//=======
-                    intent = "LastCommitMessage";
-//>>>>>>> dda8db4d751656a63aecd1c11feefd8c30e404af
+                    intent = "lastCommitOnRepo";
                 }
 
                 //Hardcoded test parameters for GitHub Querying
@@ -92,22 +88,22 @@ namespace Bot_Application1
                 //Switch on intent of message to get different data from github
                 switch (intent)
                 {
-                    case "LastCommitMessage":
+                    case "lastCommitOnRepo":
                         {
                             var commits = await github.Repository.Commit.Get(repoOwner, repoName, "master");
                             gitbotResponse = ($"The last commit by {user} on {repoOwner}/{repoName}/master was \"{commits.Commit.Message}\"");
                         }
                         break;
-                    case "LastCommitTime":
+                    case "timeOfLastCommitOnRepo":
                         {
                             var commits = await github.Repository.Commit.Get(repoOwner, repoName, "master");
-                            gitbotResponse = ($"Last commit was on {commits.Commit.Committer.Date}");
+                            gitbotResponse = ($"The last commit on {repoOwner}/{repoName}/master was on {commits.Commit.Committer.Date}");
                         }
                         break;
-                    case "NumberOfCommits":
+                    case "totalCommitsOnRepo":
                         {
                             var commits = await github.Repository.Commit.GetAll(repoOwner, repoName);
-                            gitbotResponse = ($"There has been {commits.Count} commits in this repository");
+                            gitbotResponse = ($"There has been {commits.Count} commits on {repoOwner}/{repoName}.");
 
                         }
                         break;
@@ -135,12 +131,6 @@ namespace Bot_Application1
                             gitbotResponse = ($"The last person to commit on {repoOwner}/{repoName} was {commits.Commit.Committer.Name}");
                         }
                         break;
-                    case "totalNumberOfCommitsOnRepo":
-                        {
-                            var commits = await github.Repository.Commit.GetAll(repoOwner, repoName);
-                            gitbotResponse = ($"There has been {commits.Count} commits on {repoOwner}/{repoName} in total.");
-                        }
-                        break;
                     case "numberOfFilesOnRepo":
                         {
                             var total = "";
@@ -151,12 +141,6 @@ namespace Bot_Application1
                         {
                             var total = "";
                             gitbotResponse = ($"{repoOwner}/{repoName} has {total} contributors.");
-                        }
-                        break;
-                    case "timeOfLastCommitOnRepo":
-                        {
-                            var time = "";
-                            gitbotResponse = ($"The last commit on {repoOwner}/{repoName} was made at {time}.");
                         }
                         break;
                     case "lastNumberOfCommitsOnRepo":
