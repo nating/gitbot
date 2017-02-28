@@ -67,11 +67,11 @@ namespace Bot_Application1
                 else if (activity.Text.Contains("test"))
                 {
                     //For now, put the intent you are testing in here! :)
-<<<<<<< HEAD
+//<<<<<<< HEAD
                     intent = "totalNumberOfCommitsOnRepo";
-=======
+//=======
                     intent = "LastCommitMessage";
->>>>>>> dda8db4d751656a63aecd1c11feefd8c30e404af
+//>>>>>>> dda8db4d751656a63aecd1c11feefd8c30e404af
                 }
 
                 //Hardcoded test parameters for GitHub Querying
@@ -131,13 +131,13 @@ namespace Bot_Application1
                         break;
                     case "lastPersonToCommitOnRepo":
                         {
-<<<<<<< HEAD
-                            var user = await github.Repository.Commit.Get("nating", "gitbot", "master");
-                            gitbotResponse = ($"The last person to commit on {repoOwner}/{repoName} was {user.Commit.Committer.Name}");
-=======
+//<<<<<<< HEAD
+                            var user2 = await github.Repository.Commit.Get("nating", "gitbot", "master");
+                            gitbotResponse = ($"The last person to commit on {repoOwner}/{repoName} was {user2.Commit.Committer.Name}");
+//=======
                             var last = "";
                             gitbotResponse = ($"The last person to commit on {repoOwner}/{repoName} was {user}");
->>>>>>> dda8db4d751656a63aecd1c11feefd8c30e404af
+//>>>>>>> dda8db4d751656a63aecd1c11feefd8c30e404af
                         }
                         break;
                     case "totalNumberOfCommitsOnRepo":
