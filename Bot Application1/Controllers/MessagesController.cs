@@ -25,7 +25,8 @@ namespace Bot_Application1
                 ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
 
                 /*-----------------------------------ASK LUIS-----------------------------------------------*/
-
+                // <-- PUT AN ASTERISK IN BETWEEN THESE SLASHES IF TESTING WITHOUT LUIS
+              
                 var luisText = "";
 
                 var query = Uri.EscapeDataString(activity.Text);
@@ -66,12 +67,16 @@ namespace Bot_Application1
                 else if (activity.Text.Contains("test"))
                 {
                     //For now, put the intent you are testing in here! :)
+<<<<<<< HEAD
                     intent = "totalNumberOfCommitsOnRepo";
+=======
+                    intent = "LastCommitMessage";
+>>>>>>> dda8db4d751656a63aecd1c11feefd8c30e404af
                 }
 
                 //Hardcoded test parameters for GitHub Querying
                 var number = 4;
-                var username = "nating";
+                var user = "nating";
                 var repoOwner = "nating";
                 var repoName = "gitbot";
 
@@ -89,26 +94,26 @@ namespace Bot_Application1
                 {
                     case "LastCommitMessage":
                         {
-                            var commits = await github.Repository.Commit.Get("nating", "gitbot", "master");
-                            gitbotResponse = ($"{commits.Commit.Message}");
+                            var commits = await github.Repository.Commit.Get(repoOwner, repoName, "master");
+                            gitbotResponse = ($"The last commit by {user} on {repoOwner}/{repoName}/master was \"{commits.Commit.Message}\"");
                         }
                         break;
                     case "LastCommitTime":
                         {
-                            var commits = await github.Repository.Commit.Get("nating", "gitbot", "master");
+                            var commits = await github.Repository.Commit.Get(repoOwner, repoName, "master");
                             gitbotResponse = ($"Last commit was on {commits.Commit.Committer.Date}");
                         }
                         break;
                     case "NumberOfCommits":
                         {
-                            var commits = await github.Repository.Commit.GetAll("nating", "gitbot");
+                            var commits = await github.Repository.Commit.GetAll(repoOwner, repoName);
                             gitbotResponse = ($"There has been {commits.Count} commits in this repository");
 
                         }
                         break;
                     case "numberOfContributors":
                         {
-                            var contributors = await github.Repository.GetAllContributors("nating", "gitbot");
+                            var contributors = await github.Repository.GetAllContributors(repoOwner, repoName);
                             if (contributors.Count > 1)
                                 gitbotResponse = ($"There are {contributors.Count} contributors in {repoName} repo.");
                             else
@@ -117,14 +122,22 @@ namespace Bot_Application1
                         break;
                     case "numberOfFiles":
                         {
-                            var contents = await github.Repository.Content.GetAllContents("nating", "gitbot");
-                            gitbotResponse = ($"{contents.Count} Files in {repoName} repo.");
+                            var contents = await github.Repository.Content.GetAllContents(repoOwner, repoName);
+                            if (contents.Count > 1)
+                                gitbotResponse = ($"There are {contents.Count} files in {repoName} repo.");
+                            else
+                                gitbotResponse = ($"There is {contents.Count} file in {repoName} repo.");
                         }
                         break;
                     case "lastPersonToCommitOnRepo":
                         {
+<<<<<<< HEAD
                             var user = await github.Repository.Commit.Get("nating", "gitbot", "master");
                             gitbotResponse = ($"The last person to commit on {repoOwner}/{repoName} was {user.Commit.Committer.Name}");
+=======
+                            var last = "";
+                            gitbotResponse = ($"The last person to commit on {repoOwner}/{repoName} was {user}");
+>>>>>>> dda8db4d751656a63aecd1c11feefd8c30e404af
                         }
                         break;
                     case "totalNumberOfCommitsOnRepo":
@@ -160,61 +173,61 @@ namespace Bot_Application1
                     case "usersLastCommitOnRepo":
                         {
                             var commit = "";
-                            gitbotResponse = ($"The last commit made by {username} on {repoOwner}/{repoName} was: {commit}");
+                            gitbotResponse = ($"The last commit made by {user} on {repoOwner}/{repoName} was: {commit}");
                         }
                         break;
                     case "timeOfUsersLastCommitOnRepo":
                         {
                             var time = "";
-                            gitbotResponse = ($"{time} is when {username} last commited on {repoOwner}/{repoName}.");
+                            gitbotResponse = ($"{time} is when {user} last commited on {repoOwner}/{repoName}.");
                         }
                         break;
                     case "numberOfCommitsByUserOnRepo":
                         {
                             var total = "";
-                            gitbotResponse = ($"{username} has made {total} commits on {repoOwner}/{repoName}.");
+                            gitbotResponse = ($"{user} has made {total} commits on {repoOwner}/{repoName}.");
                         }
                         break;
                     case "lastNumberOfCommitsByUser":
                         {
                             var commits = "";
-                            gitbotResponse = ($"Here are the last {number} commits by {username} on {repoOwner}/{repoName}:{commits}.");
+                            gitbotResponse = ($"Here are the last {number} commits by {user} on {repoOwner}/{repoName}:{commits}.");
                         }
                         break;
                     case "biographyOfUser":
                         {
-                            var user = await github.User.Get(username);
-                            gitbotResponse = ($"{username}'s bio is \"{user.Bio}\".");
+                            var u = await github.User.Get(user);
+                            gitbotResponse = ($"{user}'s bio is \"{u.Bio}\".");
                         }
                         break;
                     case "usersEmailAddress":
                         {
-                            var user = await github.User.Get(username);
-                            gitbotResponse = ($"{username}'s email address is \"{user.Email}\".");
+                            var u = await github.User.Get(user);
+                            gitbotResponse = ($"{user}'s email address is \"{u.Email}\".");
                         }
                         break;
                     case "usersName":
                         {
-                            var user = await github.User.Get(username);
-                            gitbotResponse = ($"{username}'s name is \"{user.Name}\".");
+                            var u = await github.User.Get(user);
+                            gitbotResponse = ($"{user}'s name is \"{u.Name}\".");
                         }
                         break;
                     case "usersLocation":
                         {
-                            var user = await github.User.Get(username);
-                            gitbotResponse = ($"{username}'s location is \"{user.Location}\".");
+                            var u = await github.User.Get(user);
+                            gitbotResponse = ($"{user}'s location is \"{u.Location}\".");
                         }
                         break;
                     case "noOfFollowersForAUser":
                         {
-                            var user = await github.User.Get(username);
-                            gitbotResponse = ($"{username} has {user.Followers} followers.");
+                            var u = await github.User.Get(user);
+                            gitbotResponse = ($"{user} has {u.Followers} followers.");
                         }
                         break;
                     case "noOfUsersAUserIsFollowing":
                         {
-                            var user = await github.User.Get(username);
-                            gitbotResponse = ($"{username} is following {user.Following} users.");
+                            var u = await github.User.Get(user);
+                            gitbotResponse = ($"{user} is following {u.Following} users.");
                         }
                         break;
                     default:
@@ -268,14 +281,74 @@ namespace Bot_Application1
             return null;
         }
 
+        //Takes the text from a LUIS response and returns the value the top scoring intent as a string if present
+        //  otherwise returns "doNotKnow"
         private string getIntent(string luisText)
         {
-            JObject luisJson = new JObject(luisText);
-            //if ()
+            JObject luisJson = JObject.Parse(luisText);
+            if (luisJson["topScoringIntent"] != null)
             {
-
+                //Needs to be updated to include a test to see if score is above a threshold
+                return luisJson["topScoringIntent"]["intent"].ToString();
             }
-            return "";
+            return "doNotKnow";
+        }
+
+        //Takes the text from a LUIS response and returns the value of the first user entity if present
+        //  Otherwise returns "doNotKnow"
+        private string getUser(string luisText)
+        {
+            JObject luisJson = JObject.Parse(luisText);
+            JArray entities = (JArray)luisJson["entities"];
+            if (entities.Count > 0)
+            {
+                for (var i = 0; i < entities.Count; i++)
+                {
+                    if (entities[i]["type"].ToString().Equals("user"))
+                    {
+                        return entities[i]["entity"].ToString();
+                    }
+                }
+            }
+            return "doNotKnow";
+        }
+
+        //Takes the text from a LUIS response and returns the value of the first repo entity if present
+        //  Otherwise returns "doNotKnow"
+        private string getRepo(string luisText)
+        {
+            JObject luisJson = JObject.Parse(luisText);
+            JArray entities = (JArray)luisJson["entities"];
+            if (entities.Count > 0)
+            {
+                for (var i = 0; i < entities.Count; i++)
+                {
+                    if (entities[i]["type"].ToString().Equals("repo"))
+                    {
+                        return entities[i]["entity"].ToString();
+                    }
+                }
+            }
+            return "doNotKnow";
+        }
+
+        //Takes the text from a LUIS response and returns the value of the first number entity if present
+        //  Otherwise returns "doNotKnow"
+        private string getNumber(string luisText)
+        {
+            JObject luisJson = JObject.Parse(luisText);
+            JArray entities = (JArray)luisJson["entities"];
+            if (entities.Count > 0)
+            {
+                for (var i = 0; i < entities.Count; i++)
+                {
+                    if (entities[i]["type"].ToString().Equals("number"))
+                    {
+                        return entities[i]["entity"].ToString();
+                    }
+                }
+            }
+            return "doNotKnow";
         }
     }
 }
