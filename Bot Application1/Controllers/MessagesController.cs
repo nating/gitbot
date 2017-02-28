@@ -66,7 +66,7 @@ namespace Bot_Application1
                 else if (activity.Text.Contains("test"))
                 {
                     //For now, put the intent you are testing in here! :)
-                    intent = "numberOfContributors";
+                    intent = "totalNumberOfCommitsOnRepo";
                 }
 
                 //Hardcoded test parameters for GitHub Querying
@@ -82,7 +82,8 @@ namespace Bot_Application1
 
                 /*---------------------------------SWITCH ON INTENT----------------------------------------*/
 
-
+                
+                
                 //Switch on intent of message to get different data from github
                 switch (intent)
                 {
@@ -122,14 +123,14 @@ namespace Bot_Application1
                         break;
                     case "lastPersonToCommitOnRepo":
                         {
-                            var user = "";
-                            gitbotResponse = ($"The last person to commit on {repoOwner}/{repoName} was {user}");
+                            var user = await github.Repository.Commit.Get("nating", "gitbot", "master");
+                            gitbotResponse = ($"The last person to commit on {repoOwner}/{repoName} was {user.Commit.Committer.Name}");
                         }
                         break;
                     case "totalNumberOfCommitsOnRepo":
                         {
-                            var total = "";
-                            gitbotResponse = ($"There has been {total} commits on {repoOwner}/{repoName} in total.");
+                            var total = await github.Repository.Commit.GetAll("nating", "gitbot");
+                            gitbotResponse = ($"There has been {total.Count} commits on {repoOwner}/{repoName} in total.");
                         }
                         break;
                     case "numberOfFilesOnRepo":
