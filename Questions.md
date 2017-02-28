@@ -1,6 +1,6 @@
 # Questions
 
-Here are a list of the type of questions, that gitbot can (we hope by the end of may?) answer.  
+Here is a list of the type of questions, that gitbot can (we hope by the end of may?) answer.  
 The LUIS Model column describes which LUIS Model the question is sent to to determine it's intent. The Code Written column helps us keep track of the functionality that has yet to be implemented.
 
 ## Required Functionality
