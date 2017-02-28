@@ -131,19 +131,14 @@ namespace Bot_Application1
                         break;
                     case "lastPersonToCommitOnRepo":
                         {
-//<<<<<<< HEAD
-                            var user2 = await github.Repository.Commit.Get("nating", "gitbot", "master");
-                            gitbotResponse = ($"The last person to commit on {repoOwner}/{repoName} was {user2.Commit.Committer.Name}");
-//=======
-                            var last = "";
-                            gitbotResponse = ($"The last person to commit on {repoOwner}/{repoName} was {user}");
-//>>>>>>> dda8db4d751656a63aecd1c11feefd8c30e404af
+                            var commits = await github.Repository.Commit.Get(repoOwner, repoName, "master");
+                            gitbotResponse = ($"The last person to commit on {repoOwner}/{repoName} was {commits.Commit.Committer.Name}");
                         }
                         break;
                     case "totalNumberOfCommitsOnRepo":
                         {
-                            var total = await github.Repository.Commit.GetAll("nating", "gitbot");
-                            gitbotResponse = ($"There has been {total.Count} commits on {repoOwner}/{repoName} in total.");
+                            var commits = await github.Repository.Commit.GetAll(repoOwner, repoName);
+                            gitbotResponse = ($"There has been {commits.Count} commits on {repoOwner}/{repoName} in total.");
                         }
                         break;
                     case "numberOfFilesOnRepo":
