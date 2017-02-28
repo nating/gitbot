@@ -267,14 +267,74 @@ namespace Bot_Application1
             return null;
         }
 
+        //Takes the text from a LUIS response and returns the value the top scoring intent as a string if present
+        //  otherwise returns "doNotKnow"
         private string getIntent(string luisText)
         {
-            JObject luisJson = new JObject(luisText);
-            //if ()
+            JObject luisJson = JObject.Parse(luisText);
+            if (luisJson["topScoringIntent"] != null)
             {
-
+                //Needs to be updated to include a test to see if score is above a threshold
+                return luisJson["topScoringIntent"]["intent"].ToString();
             }
-            return "";
+            return "doNotKnow";
+        }
+
+        //Takes the text from a LUIS response and returns the value of the first user entity if present
+        //  Otherwise returns "doNotKnow"
+        private string getUser(string luisText)
+        {
+            JObject luisJson = JObject.Parse(luisText);
+            JArray entities = (JArray)luisJson["entities"];
+            if (entities.Count > 0)
+            {
+                for (var i = 0; i < entities.Count; i++)
+                {
+                    if (entities[i]["type"].ToString().Equals("user"))
+                    {
+                        return entities[i]["entity"].ToString();
+                    }
+                }
+            }
+            return "doNotKnow";
+        }
+
+        //Takes the text from a LUIS response and returns the value of the first repo entity if present
+        //  Otherwise returns "doNotKnow"
+        private string getRepo(string luisText)
+        {
+            JObject luisJson = JObject.Parse(luisText);
+            JArray entities = (JArray)luisJson["entities"];
+            if (entities.Count > 0)
+            {
+                for (var i = 0; i < entities.Count; i++)
+                {
+                    if (entities[i]["type"].ToString().Equals("repo"))
+                    {
+                        return entities[i]["entity"].ToString();
+                    }
+                }
+            }
+            return "doNotKnow";
+        }
+
+        //Takes the text from a LUIS response and returns the value of the first number entity if present
+        //  Otherwise returns "doNotKnow"
+        private string getNumber(string luisText)
+        {
+            JObject luisJson = JObject.Parse(luisText);
+            JArray entities = (JArray)luisJson["entities"];
+            if (entities.Count > 0)
+            {
+                for (var i = 0; i < entities.Count; i++)
+                {
+                    if (entities[i]["type"].ToString().Equals("number"))
+                    {
+                        return entities[i]["entity"].ToString();
+                    }
+                }
+            }
+            return "doNotKnow";
         }
     }
 }
