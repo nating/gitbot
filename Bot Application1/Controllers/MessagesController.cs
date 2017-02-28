@@ -49,12 +49,14 @@ namespace Bot_Application1
 
                 /*--------------------------------PARSE LUIS------------------------------------------------*/
 
-                //var intent = getIntent(luisText);
-                //var user = getUser(luisText);
-                //var repo = getRepo(luisText);
-                //var number = getNumber(luisText);
+                var intent = getIntent(luisText);
+                var user = getUser(luisText);
+                var repoOwner = getRepoOwner(luisText);
+                var repoName = getRepoName(luisText);
+                var number = getNumber(luisText);
 
                 // Sample decoding of message while LUIS not up and running
+                /*
                 var intent = "";
                 if (activity.Text.Contains("biography"))
                 {
@@ -75,6 +77,7 @@ namespace Bot_Application1
                 var user = "nating";
                 var repoOwner = "nating";
                 var repoName = "gitbot";
+                */
 
                 var github = new GitHubClient(new ProductHeaderValue("GitBot"));
                 var gitbotResponse = "";
@@ -107,7 +110,8 @@ namespace Bot_Application1
 
                         }
                         break;
-                    case "numberOfContributors":
+                        //Not Yet Implemented on LUIS
+                    case "numberOfContributorsOnRepo":
                         {
                             var contributors = await github.Repository.GetAllContributors(repoOwner, repoName);
                             if (contributors.Count > 1)
@@ -116,7 +120,7 @@ namespace Bot_Application1
                                 gitbotResponse = ($"There is {contributors.Count} contributor in {repoName} repo.");
                         }
                         break;
-                    case "numberOfFiles":
+                    case "numberOfFilesInRepo":
                         {
                             var contents = await github.Repository.Content.GetAllContents(repoOwner, repoName);
                             if (contents.Count > 1)
@@ -125,22 +129,11 @@ namespace Bot_Application1
                                 gitbotResponse = ($"There is {contents.Count} file in {repoName} repo.");
                         }
                         break;
+                        //Not yet implemented on LUIS
                     case "lastPersonToCommitOnRepo":
                         {
                             var commits = await github.Repository.Commit.Get(repoOwner, repoName, "master");
                             gitbotResponse = ($"The last person to commit on {repoOwner}/{repoName} was {commits.Commit.Committer.Name}");
-                        }
-                        break;
-                    case "numberOfFilesOnRepo":
-                        {
-                            var total = "";
-                            gitbotResponse = ($"There are {total} files in {repoOwner}/{repoName}.");
-                        }
-                        break;
-                    case "numberOfContributorsOnRepo":
-                        {
-                            var total = "";
-                            gitbotResponse = ($"{repoOwner}/{repoName} has {total} contributors.");
                         }
                         break;
                     case "lastNumberOfCommitsOnRepo":
@@ -220,7 +213,7 @@ namespace Bot_Application1
                 /*-----------------------------------RESPOND TO CLIENT-------------------------------------*/
 
                 // Return our reply to the user
-                Microsoft.Bot.Connector.Activity reply = activity.CreateReply($"You said to me:\"{activity.Text}\". \n\n My response is:\"{gitbotResponse}\"");
+                Microsoft.Bot.Connector.Activity reply = activity.CreateReply($"{gitbotResponse}");
                 await connector.Conversations.ReplyToActivityAsync(reply);
             }
             else
@@ -292,9 +285,9 @@ namespace Bot_Application1
             return "doNotKnow";
         }
 
-        //Takes the text from a LUIS response and returns the value of the first repo entity if present
+        //Takes the text from a LUIS response and returns the value of the first repoOwner entity if present
         //  Otherwise returns "doNotKnow"
-        private string getRepo(string luisText)
+        private string getRepoOwner(string luisText)
         {
             JObject luisJson = JObject.Parse(luisText);
             JArray entities = (JArray)luisJson["entities"];
@@ -302,7 +295,26 @@ namespace Bot_Application1
             {
                 for (var i = 0; i < entities.Count; i++)
                 {
-                    if (entities[i]["type"].ToString().Equals("repo"))
+                    if (entities[i]["type"].ToString().Equals("repoOwner"))
+                    {
+                        return entities[i]["entity"].ToString();
+                    }
+                }
+            }
+            return "doNotKnow";
+        }
+
+        //Takes the text from a LUIS response and returns the value of the first repoName entity if present
+        //  Otherwise returns "doNotKnow"
+        private string getRepoName(string luisText)
+        {
+            JObject luisJson = JObject.Parse(luisText);
+            JArray entities = (JArray)luisJson["entities"];
+            if (entities.Count > 0)
+            {
+                for (var i = 0; i < entities.Count; i++)
+                {
+                    if (entities[i]["type"].ToString().Equals("repoName"))
                     {
                         return entities[i]["entity"].ToString();
                     }
