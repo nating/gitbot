@@ -49,7 +49,7 @@ namespace Bot_Application1
                 else if (activity.Text.Contains("test"))
                 {
                     //For now, put the intent you are testing in here! :)
-                    intent = "";
+                    intent = "LastCommitMessage";
                 }
 
                 var github = new GitHubClient(new ProductHeaderValue("GitBot"));
@@ -74,6 +74,46 @@ namespace Bot_Application1
                 //Switch on intent of message to get different data from github
                 switch (intent)
                 {
+                    case "LastCommitMessage":
+                        {
+                            var commits = await github.Repository.Commit.Get("nating", "gitbot", "master");
+                            gitbotResponse = ($"{commits.Commit.Message}");
+                        }
+                        break;
+                    case "TotalCommits":
+                        {
+                            var commits = await github.Repository.Commit.Get("nating", "gitbot", "master");
+                            gitbotResponse = ($"{commits.Commit.Repository}");
+                        }
+                        break;
+                    case "LastCommitTime":
+                        {
+                            var commits = await github.Repository.Commit.Get("nating", "gitbot", "master");
+                            gitbotResponse = ($"Last commit was on {commits.Commit.Committer.Date}");
+                        }
+                        break;
+                    case "NumberOfCommits":
+                        {
+                            var commits = await github.Repository.Commit.GetAll("nating", "gitbot");
+                            gitbotResponse = ($"There has been {commits.Count} commits in this repository");
+
+                        }
+                        break;
+                    case "numberOfContributors":
+                        {
+                            var contributors = await github.Repository.GetAllContributors("nating", "gitbot");
+                            if (contributors.Count > 1)
+                                gitbotResponse = ($"There are {contributors.Count} contributors in {repoName} repo.");
+                            else
+                                gitbotResponse = ($"There is {contributors.Count} contributor in {repoName} repo.");
+                        }
+                        break;
+                    case "numberOfFiles":
+                        {
+                            var contents = await github.Repository.Content.GetAllContents("nating", "gitbot");
+                            gitbotResponse = ($"{contents.Count} Files in {repoName} repo.");
+                        }
+                        break;
                     case "lastPersonToCommitOnRepo":
                         {
                             var user = "";
