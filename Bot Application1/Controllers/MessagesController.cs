@@ -94,13 +94,13 @@ namespace Bot_Application1
                     case "lastCommitOnRepo":
                         {
                             var commits = await github.Repository.Commit.Get(repoOwner, repoName, "master");
-                            gitbotResponse = ($"The last commit by {user} on {repoOwner}/{repoName}/master was \"{commits.Commit.Message}\"");
+                            gitbotResponse = ($"The last commit was at {commits.Commit.Committer.Date.TimeOfDay} on {commits.Commit.Committer.Date.Day}/{commits.Commit.Committer.Date.Month}/{commits.Commit.Committer.Date.Year} by {commits.Commit.Author.Name}: \"{commits.Commit.Message}\"");
                         }
                         break;
                     case "timeOfLastCommitOnRepo":
                         {
                             var commits = await github.Repository.Commit.Get(repoOwner, repoName, "master");
-                            gitbotResponse = ($"The last commit on {repoOwner}/{repoName}/master was on {commits.Commit.Committer.Date}");
+                            gitbotResponse = ($"The last commit on {repoOwner}/{repoName}/master was made at {commits.Commit.Committer.Date.TimeOfDay} on {commits.Commit.Committer.Date.Day}/{commits.Commit.Committer.Date.Month}/{commits.Commit.Committer.Date.Year}.");
                         }
                         break;
                     case "totalCommitsOnRepo":
