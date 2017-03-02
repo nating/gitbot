@@ -292,6 +292,29 @@ namespace Bot_Application1
                             gitbotResponse = ($"{user} is following {u.Following} users.");
                         }
                         break;
+                    case "noOfWatchersOfRepo":
+                        {
+                            var repo = await github.Activity.Watching.GetAllWatchers(repoOwner, repoName);
+                            gitbotResponse = ($"Watchers are {repo.Count}");
+                        }
+                        break;
+                    case "noOfReposUserHasStarred":
+                        {
+                            var repo = await github.Activity.Starring.GetAllForUser(user);
+                            gitbotResponse = ($"{user} has starred {repo.Count} repos");
+                        }
+                        break;
+                    case "reposOwnedByUser":
+                        {
+                            var repo = await github.Repository.GetAllForUser("nating");
+                            var count = repo.Count;
+                            gitbotResponse = ("Repos are:\n");
+                            for (int i = 0; i < count; i++)
+                            {
+                                gitbotResponse += ($"\n\"{repo.ElementAt(i).Name}\" \n");
+                            }
+                        }
+                        break;
                     default:
                         {
                             gitbotResponse = ("I'm sorry, I don't know what you're asking me for!");
