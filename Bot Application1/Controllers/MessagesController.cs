@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -81,16 +82,14 @@ namespace Bot_Application1
 
                 var github = new GitHubClient(new ProductHeaderValue("GitBot"));
                 var gitbotResponse = "";
-
                 var theRepo = github.Repository.Get("nating","gitbot");
 
                 /*---------------------------------SWITCH ON INTENT----------------------------------------*/
 
-                
-                
                 //Switch on intent of message to get different data from github
                 switch (intent)
                 {
+                    
                     case "lastCommitOnRepo":
                         {
                             var commits = await github.Repository.Commit.Get(repoOwner, repoName, "master");
@@ -110,7 +109,98 @@ namespace Bot_Application1
 
                         }
                         break;
-                        //Not Yet Implemented on LUIS
+                    //Not Yet Implemented on LUIS
+
+                    // for testing change case to lastCommitOnRepo and comment that out
+                    case "lastNCommits":
+                        {
+                            var commits = await github.Repository.Commit.GetAll(repoOwner, repoName);
+                            var noOfCommits = commits.Count;
+                            var previousCommits = "";
+                            var previousCommiter = "";
+
+                            /*int i should instead be the number LUIS found*/
+                            for (int i = 0; i < 5; i++)
+                            {
+                                previousCommits = commits.ElementAt(i).Commit.Message;  // for ElementAt() index 0 = most recent commit
+                                previousCommiter = commits.ElementAt(i).Commit.Author.Name;
+                                if (i == 0)
+                                    gitbotResponse += ($"\nCommit #{noOfCommits - 1}, The last commit was by {previousCommiter}. \"{previousCommits}\" \n");
+                                else
+                                    gitbotResponse += ($"\nCommit #{noOfCommits - 1 - i} was by {previousCommiter}. \"{previousCommits}\" \n");
+                            }
+                        }
+                        break;
+
+                    /* again LUIS should interperate the user, hardcoded for now*/
+                    case "usersLastCommit": //test last commit by Shane(SCarmo)
+                        {
+                            var commits = await github.Repository.Commit.GetAll(repoOwner, repoName);
+                            var User = "Shane Carmody";
+                            int i = 0;
+                            while (!String.Equals(commits.ElementAt(i).Commit.Author.Name, User, StringComparison.Ordinal))
+                            {
+                                i++;
+                            }
+                            gitbotResponse = ($"The last commit by {User} was \"{commits.ElementAt(i).Commit.Message}\" ");
+                        }
+                        break;
+
+                    /* Could incoorporate this with previous case i.e. last commit message and time */
+                    case "timeOfUsersLastCommit":
+                        {
+                            var commits = await github.Repository.Commit.GetAll(repoOwner, repoName);
+                            var User = "Shane Carmody";
+                            int i = 0;
+
+                            while (!String.Equals(commits.ElementAt(i).Commit.Author.Name, User, StringComparison.Ordinal))
+                                i++;
+
+                            gitbotResponse = ($"The last commit time by {User} was at {commits.ElementAt(i).Commit.Committer.Date.TimeOfDay} on {commits.ElementAt(i).Commit.Committer.Date.Day}/{commits.ElementAt(i).Commit.Committer.Date.Month}/{commits.ElementAt(i).Commit.Committer.Date.Year}.");
+                        }
+                        break;
+
+                    /* Once again hardcoded until LUIS can handle it*/
+                    case "noOfUserCommits":
+                        {
+                            var commits = await github.Repository.Commit.GetAll(repoOwner, repoName);
+                            var User = "Geoffrey Natin";
+                            int noOfCommits = commits.Count;
+                            int count = 0;
+                            for (int i = 0; i < noOfCommits; i++)
+                                if (String.Equals(commits.ElementAt(i).Commit.Author.Name, User, StringComparison.Ordinal))
+                                    count++;
+
+                            if (count == 1)
+                                gitbotResponse = ($"{User} has made {count} commit to {repoOwner}/{repoName}");
+
+                            else
+                                gitbotResponse = ($"{User} has made {count} commits to {repoOwner}/{repoName}");
+                        }
+                        break;
+
+                    case "usersLastNCommits":
+                        {
+                            var User = "Geoff Natin";
+                            var lastNCommits = 2;
+                            gitbotResponse = ($"{User}'s last {lastNCommits} commits were:\n");
+                            //int[] indexArray = new int[lastNCommits];
+                            var commits = await github.Repository.Commit.GetAll(repoOwner, repoName);
+                            int index = 0;
+                            int count = 0; // keep count of commits by user  
+                            while (count < lastNCommits)
+                            {
+                                if (String.Equals(commits.ElementAt(index).Commit.Author.Name, User, StringComparison.Ordinal))
+                                {
+                                    count++;
+                                    gitbotResponse += ($"\n\"{commits.ElementAt(index).Commit.Message}\" \n");
+                                }
+                                index++;
+                            }
+
+
+                        }
+                        break;
                     case "numberOfContributorsOnRepo":
                         {
                             var contributors = await github.Repository.GetAllContributors(repoOwner, repoName);
