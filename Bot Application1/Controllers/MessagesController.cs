@@ -111,6 +111,15 @@ namespace Bot_Application1
                         break;
                     //Not Yet Implemented on LUIS
 
+                    case "lastCommiter":
+                        {
+                            var commits = await github.Repository.Commit.GetAll(repoOwner, repoName);
+                            gitbotResponse = ($"The last commit was made by {commits.ElementAt(0).Commit.Author.Name} \n");
+                            gitbotResponse += ($"\nUsername: {commits.ElementAt(0).Author.Login} \n");
+                            gitbotResponse += ($"\nEmail: {commits.ElementAt(0).Commit.Author.Email} \n");
+                        }
+                        break;
+
                     // for testing change case to lastCommitOnRepo and comment that out
                     case "lastNCommits":
                         {
@@ -357,7 +366,7 @@ namespace Bot_Application1
             }
             else if (message.Type == ActivityTypes.Typing)
             {
-                // Handle knowing tha the user is typing
+                Console.Write("hi");
             }
             else if (message.Type == ActivityTypes.Ping)
             {
