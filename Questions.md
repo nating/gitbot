@@ -29,3 +29,6 @@ The LUIS Model column describes which LUIS Model the question is sent to to dete
 |Where is `<user>`'s location?					            |			      |✅            |✅
 |What is `<user>`'s name?								            |			      |✅            |✅
 |Who was the last person to commit on `<repo>`?			|			      |❌            |❌
+|How many watchers on `<repo>`?			                |			      |❌            |✅
+|How many repos has `<user>` starred?			          |			      |❌            |✅
+|Whats `<repo>`s does this `<user>` own?			      |			      |❌            |✅
