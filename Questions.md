@@ -31,4 +31,4 @@ The LUIS Model column describes which LUIS Model the question is sent to to dete
 |Who was the last person to commit on `<repo>`?			|			      |❌            |❌
 |How many watchers on `<repo>`?			                |			      |❌            |✅
 |How many repos has `<user>` starred?			          |			      |❌            |✅
-|Whats `<repo>`s does this `<user>` own?			      |			      |❌            |✅
+|What `<repo>`s does this `<user>` own?			      |			      |❌            |✅
