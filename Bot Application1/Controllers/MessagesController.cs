@@ -90,12 +90,12 @@ namespace Bot_Application1
                 switch (intent)
                 {
                     
-                    case "lastCommitOnRepo":
+                    /*case "lastCommitOnRepo":
                         {
                             var commits = await github.Repository.Commit.Get(repoOwner, repoName, "master");
                             gitbotResponse = ($"The last commit was at {commits.Commit.Committer.Date.TimeOfDay} on {commits.Commit.Committer.Date.Day}/{commits.Commit.Committer.Date.Month}/{commits.Commit.Committer.Date.Year} by {commits.Commit.Author.Name}: \"{commits.Commit.Message}\"");
                         }
-                        break;
+                        break;*/
                     case "timeOfLastCommitOnRepo":
                         {
                             var commits = await github.Repository.Commit.Get(repoOwner, repoName, "master");
@@ -121,7 +121,8 @@ namespace Bot_Application1
                         break;
 
                     // for testing change case to lastCommitOnRepo and comment that out
-                    case "lastNCommits":
+                    //case "lastNCommits":
+                    case "lastCommitOnRepo":
                         {
                             var commits = await github.Repository.Commit.GetAll(repoOwner, repoName);
                             var noOfCommits = commits.Count;
@@ -129,14 +130,14 @@ namespace Bot_Application1
                             var previousCommiter = "";
 
                             /*int i should instead be the number LUIS found*/
-                            for (int i = 0; i < 5; i++)
+                            for (int i = 0; i < 60; i++)
                             {
                                 previousCommits = commits.ElementAt(i).Commit.Message;  // for ElementAt() index 0 = most recent commit
                                 previousCommiter = commits.ElementAt(i).Commit.Author.Name;
                                 if (i == 0)
-                                    gitbotResponse += ($"\nCommit #{noOfCommits - 1}, The last commit was by {previousCommiter}. \"{previousCommits}\" \n");
+                                    gitbotResponse += ($"\nCommit #{noOfCommits}, The last commit was by {previousCommiter}. \"{previousCommits}\" \n");
                                 else
-                                    gitbotResponse += ($"\nCommit #{noOfCommits - 1 - i} was by {previousCommiter}. \"{previousCommits}\" \n");
+                                    gitbotResponse += ($"\nCommit #{noOfCommits - i} was by {previousCommiter}. \"{previousCommits}\" \n");
                             }
                         }
                         break;
