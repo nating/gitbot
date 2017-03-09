@@ -7,17 +7,17 @@ The LUIS Model column describes which LUIS Model the question is sent to to dete
 
 |Questions											                    |LUIS Model	|LUIS Taught  |Code Written	|In Wiki
 |---------------------------------------------------|-----------|-------------|-------------|----
-|How many contributors does `<repo>` have?			    |			      |✅			      |✅           |❌
-|How many files are in `<repo>`?						        |			      |✅			      |✅           |❌
+|How many contributors does `<repo>` have?			    |			      |❌			      |✅           |❌
+|How many files are in `<repo>`?						        |			      |❌			      |✅           |❌
 |How many watchers on `<repo>`?			                |			      |❌            |✅           |❌
 
 ## Commits
 
 |Questions											                    |LUIS Model	|LUIS Taught  |Code Written	|In Wiki 
 |---------------------------------------------------|-----------|-------------|-------------|-----
-|What was the last commit on `<repo>`?				      |			      |✅            |✅           |❌
-|When was the last commit on `<repo>`?				      |			      |✅			      |✅           |❌
-|How many total commits are there on `<repo>`?		  |			      |✅			      |✅           |❌
+|What was the last commit on `<repo>`?				      |			      |❌            |✅           |❌
+|When was the last commit on `<repo>`?				      |			      |❌			      |✅           |❌
+|How many total commits are there on `<repo>`?		  |			      |❌			      |✅           |❌
 |What were the last `<number>` commits on `<repo>`? |			      |❌			      |✅           |❌
 |What was `<user>`’s last commit on `<repo>`?			  |			      |❌			      |✅           |❌
 |When was `<user>`’s last commit on `<repo>`?			  |			      |❌			      |✅           |❌
