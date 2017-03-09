@@ -6,15 +6,15 @@ The LUIS Model column describes which LUIS Model the question is sent to to dete
 ## Repositories
 
 |Questions											                    |LUIS Taught  |Code Written	|In Wiki
-|---------------------------------------------------|-------------|-------------|----
+|---------------------------------------------------|-------------|-------------|---
 |How many contributors does `<repo>` have?			    |❌			      |✅           |❌
 |How many files are in `<repo>`?						        |❌			      |✅           |❌
 |How many watchers on `<repo>`?			                |❌            |✅           |❌
 
 ## Commits
 
-|Questions											                    |LUIS Model	   |LUIS Taught  |Code Written	|In Wiki 
-|---------------------------------------------------|--------------|-------------|-------------|-----
+|Questions											                    |LUIS Taught  |Code Written	|In Wiki 
+|---------------------------------------------------|--------------|-------------|---
 |What was the last commit on `<repo>`?				      |❌            |✅           |❌
 |When was the last commit on `<repo>`?				      |❌			      |✅           |❌
 |How many total commits are there on `<repo>`?		  |❌			      |✅           |❌
@@ -27,14 +27,14 @@ The LUIS Model column describes which LUIS Model the question is sent to to dete
 
 ## Issues
 
-|Questions											                    |LUIS Model	|LUIS Taught  |Code Written	|In Wiki
-|---------------------------------------------------|-----------|-------------|-------------|----
-|How many issues does `<repo>` have?                |❌           |❌           |❌
+|Questions											                    |LUIS Taught  |Code Written	|In Wiki
+|---------------------------------------------------|-------------|-------------|---
+|How many issues does `<repo>` have?                |❌            |❌           |❌
 
 ## Users
 
 |Questions											                    |LUIS Taught|Code Written	 |In Wiki
-|---------------------------------------------------|-----------|-------------|--------------|----
+|---------------------------------------------------|-----------|--------------|---
 |What is `<user>`'s biography?					            |✅          |✅            |✅
 |What is `<user>`'s email address?			            |✅          |✅            |✅
 |How many followers does `<user>` have?	            |✅          |✅            |✅
