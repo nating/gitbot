@@ -43,3 +43,4 @@ The LUIS Model column describes which LUIS Model the question is sent to to dete
 |What is `<user>`'s name?								            |✅          |✅            |✅
 |What `<repo>`s does this `<user>` own?			        |❌          |✅            |❌
 |How many repos has `<user>` starred?			          |❌          |✅            |❌
+|What's the link to `<user>`'s profile?		          |❌          |❌            |❌
