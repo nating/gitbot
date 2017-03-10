@@ -363,9 +363,14 @@ namespace Bot_Application1
                             gitbotResponse = ($"{user} has {repos.Count} repositories.");
                         }
                         break;
+                    case "help":
+                        {
+                            gitbotResponse = ($"You can ask me anything about information on GitHub!  \nHere's the type of questions that you can ask me: https://github.com/nating/gitbot/wiki/Questions");
+                        }
+                        break;
                     default:
                         {
-                            gitbotResponse = ("I'm sorry, I don't know what you're asking me for!\nHere's the type of questions that you can ask me: https://github.com/nating/gitbot/wiki/Questions");
+                            gitbotResponse = ("I'm sorry, I don't know what you're asking me for!  \nHere's the type of questions that you can ask me: https://github.com/nating/gitbot/wiki/Questions");
                         }
                         break;
 
