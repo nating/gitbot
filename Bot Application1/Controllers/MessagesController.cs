@@ -33,7 +33,7 @@ namespace Bot_Application1
                 var query = Uri.EscapeDataString(activity.Text);
                 using (HttpClient client = new HttpClient())
                 {
-                    string RequestURI = "https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/b17d6663-6ed9-40aa-98f1-49a8167fbf31?subscription-key=0b6cd41f07b2459389272439c1ee757a&q=" + query;
+                    string RequestURI = "https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/560dcd08-17ab-433c-af87-c1f9790e2df2?subscription-key=d083a35e1b8c47138a0249785069b387&verbose=true&q=" + query;
                     HttpResponseMessage msg = await client.GetAsync(RequestURI);
 
                     if ((int)msg.StatusCode==200)
@@ -229,7 +229,6 @@ namespace Bot_Application1
                                 gitbotResponse = ($"There is {contents.Count} file in {repoName} repo.");
                         }
                         break;
-                        //Not yet implemented on LUIS
                     case "lastPersonToCommitOnRepo":
                         {
                             var commits = await github.Repository.Commit.Get(repoOwner, repoName, "master");
@@ -266,13 +265,13 @@ namespace Bot_Application1
                             gitbotResponse = ($"Here are the last {number} commits by {user} on {repoOwner}/{repoName}:{commits}.");
                         }
                         break;
-                    case "biographyOfUser":
+                    case "usersBiography":
                         {
                             var u = await github.User.Get(user);
-                            gitbotResponse = ($"{user}'s bio is \"{u.Bio}\".");
+                            gitbotResponse = ($"{user}'s biography is \"{u.Bio}\".");
                         }
                         break;
-                    case "usersEmailAddress":
+                    case "usersEmail":
                         {
                             var u = await github.User.Get(user);
                             gitbotResponse = ($"{user}'s email address is \"{u.Email}\".");
@@ -284,19 +283,25 @@ namespace Bot_Application1
                             gitbotResponse = ($"{user}'s name is \"{u.Name}\".");
                         }
                         break;
+                    case "usersProfileLink":
+                        {
+                            var u = await github.User.Get(user);
+                            gitbotResponse = ($"Here's a link to {user}'s profile: {u.HtmlUrl}");
+                        }
+                        break;
                     case "usersLocation":
                         {
                             var u = await github.User.Get(user);
                             gitbotResponse = ($"{user}'s location is \"{u.Location}\".");
                         }
                         break;
-                    case "noOfFollowersForAUser":
+                    case "usersFollowerCount":
                         {
                             var u = await github.User.Get(user);
                             gitbotResponse = ($"{user} has {u.Followers} followers.");
                         }
                         break;
-                    case "noOfUsersAUserIsFollowing":
+                    case "usersFollowingCount":
                         {
                             var u = await github.User.Get(user);
                             gitbotResponse = ($"{user} is following {u.Following} users.");
@@ -304,30 +309,36 @@ namespace Bot_Application1
                         break;
                     case "noOfWatchersOfRepo":
                         {
-                            var repo = await github.Activity.Watching.GetAllWatchers(repoOwner, repoName);
-                            gitbotResponse = ($"Watchers are {repo.Count}");
+                            var watchers = await github.Activity.Watching.GetAllWatchers(repoOwner, repoName);
+                            gitbotResponse = ($"Watchers are {watchers.Count}");
                         }
                         break;
-                    case "noOfReposUserHasStarred":
+                    case "usersStarsCount":
                         {
-                            var repo = await github.Activity.Starring.GetAllForUser(user);
-                            gitbotResponse = ($"{user} has starred {repo.Count} repos");
+                            var repos = await github.Activity.Starring.GetAllForUser(user);
+                            gitbotResponse = ($"{user} has starred {repos.Count} repos");
                         }
                         break;
-                    case "reposOwnedByUser":
+                    case "usersRepositories":
                         {
-                            var repo = await github.Repository.GetAllForUser("nating");
-                            var count = repo.Count;
-                            gitbotResponse = ("Repos are:\n");
+                            var repos = await github.Repository.GetAllForUser("nating");
+                            var count = repos.Count;
+                            gitbotResponse = ($"Here are {user}'s repositories:  \n");
                             for (int i = 0; i < count; i++)
                             {
-                                gitbotResponse += ($"\n\"{repo.ElementAt(i).Name}\" \n");
+                                gitbotResponse += ($"\"{repos.ElementAt(i).Name}\"  \n");
                             }
+                        }
+                        break;
+                    case "usersRepositoryCount":
+                        {
+                            var repos = await github.Repository.GetAllForUser("nating");
+                            gitbotResponse = ($"{user} has {repos.Count} repositories.");
                         }
                         break;
                     default:
                         {
-                            gitbotResponse = ("I'm sorry, I don't know what you're asking me for!");
+                            gitbotResponse = ("I'm sorry, I don't know what you're asking me for!\nHere's the type of questions that you can ask me: https://github.com/nating/gitbot/wiki/Questions");
                         }
                         break;
 
