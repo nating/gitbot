@@ -41,7 +41,7 @@ The LUIS Model column describes which LUIS Model the question is sent to to dete
 |How many users is `<user>` following?	            |✅          |✅            |✅
 |Where is `<user>`'s location?					            |✅          |✅            |✅
 |What is `<user>`'s name?								            |✅          |✅            |✅
-|What repositories does `<user>` own?			          |❌          |✅            |✅
+|What repositories does `<user>` own?			          |✅          |✅            |✅
 |How many repositories does `<user>` own?			      |❌          |❌            |✅
 |How many repositories has `<user>` starred?			  |❌          |✅            |✅
 |What's the link to `<user>`'s profile?		          |✅          |❌            |✅
