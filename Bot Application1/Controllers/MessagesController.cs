@@ -98,12 +98,14 @@ namespace Bot_Application1
                         break;*/
                     case "timeOfLastCommitOnRepo":
                         {
+                            if(repoOwner==null){ gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
                             var commits = await github.Repository.Commit.Get(repoOwner, repoName, "master");
                             gitbotResponse = ($"The last commit on {repoOwner}/{repoName}/master was made at {commits.Commit.Committer.Date.TimeOfDay} on {commits.Commit.Committer.Date.Day}/{commits.Commit.Committer.Date.Month}/{commits.Commit.Committer.Date.Year}.");
                         }
                         break;
                     case "totalCommitsOnRepo":
                         {
+                            if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
                             var commits = await github.Repository.Commit.GetAll(repoOwner, repoName);
                             gitbotResponse = ($"There has been {commits.Count} commits on {repoOwner}/{repoName}.");
 
@@ -113,6 +115,7 @@ namespace Bot_Application1
 
                     case "lastCommiter":
                         {
+                            if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
                             var commits = await github.Repository.Commit.GetAll(repoOwner, repoName);
                             gitbotResponse = ($"The last commit was made by {commits.ElementAt(0).Commit.Author.Name} \n");
                             gitbotResponse += ($"\nUsername: {commits.ElementAt(0).Author.Login} \n");
@@ -124,6 +127,7 @@ namespace Bot_Application1
                     //case "lastNCommits":
                     case "lastCommitOnRepo":
                         {
+                            if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
                             var commits = await github.Repository.Commit.GetAll(repoOwner, repoName);
                             var noOfCommits = commits.Count;
                             var previousCommits = "";
@@ -145,6 +149,7 @@ namespace Bot_Application1
                     /* again LUIS should interperate the user, hardcoded for now*/
                     case "usersLastCommit": //test last commit by Shane(SCarmo)
                         {
+                            if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
                             var commits = await github.Repository.Commit.GetAll(repoOwner, repoName);
                             var User = "Shane Carmody";
                             int i = 0;
@@ -159,6 +164,7 @@ namespace Bot_Application1
                     /* Could incoorporate this with previous case i.e. last commit message and time */
                     case "timeOfUsersLastCommit":
                         {
+                            if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
                             var commits = await github.Repository.Commit.GetAll(repoOwner, repoName);
                             var User = "Shane Carmody";
                             int i = 0;
@@ -173,6 +179,7 @@ namespace Bot_Application1
                     /* Once again hardcoded until LUIS can handle it*/
                     case "noOfUserCommits":
                         {
+                            if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
                             var commits = await github.Repository.Commit.GetAll(repoOwner, repoName);
                             var User = "Geoffrey Natin";
                             int noOfCommits = commits.Count;
@@ -191,6 +198,7 @@ namespace Bot_Application1
 
                     case "usersLastNCommits":
                         {
+                            if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
                             var User = "Geoff Natin";
                             var lastNCommits = 2;
                             gitbotResponse = ($"{User}'s last {lastNCommits} commits were:\n");
@@ -213,6 +221,7 @@ namespace Bot_Application1
                         break;
                     case "numberOfContributorsOnRepo":
                         {
+                            if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
                             var contributors = await github.Repository.GetAllContributors(repoOwner, repoName);
                             if (contributors.Count > 1)
                                 gitbotResponse = ($"There are {contributors.Count} contributors in {repoName} repo.");
@@ -222,6 +231,7 @@ namespace Bot_Application1
                         break;
                     case "numberOfFilesInRepo":
                         {
+                            if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
                             var contents = await github.Repository.Content.GetAllContents(repoOwner, repoName);
                             if (contents.Count > 1)
                                 gitbotResponse = ($"There are {contents.Count} files in {repoName} repo.");
@@ -231,96 +241,112 @@ namespace Bot_Application1
                         break;
                     case "lastPersonToCommitOnRepo":
                         {
+                            if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
                             var commits = await github.Repository.Commit.Get(repoOwner, repoName, "master");
                             gitbotResponse = ($"The last person to commit on {repoOwner}/{repoName} was {commits.Commit.Committer.Name}");
                         }
                         break;
                     case "lastNumberOfCommitsOnRepo":
                         {
+                            if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
                             var commits = "";
                             gitbotResponse = ($"Here are the last {number} commits on {repoOwner}/{repoName}:{commits}");
                         }
                         break;
                     case "usersLastCommitOnRepo":
                         {
+                            if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
                             var commit = "";
                             gitbotResponse = ($"The last commit made by {user} on {repoOwner}/{repoName} was: {commit}");
                         }
                         break;
                     case "timeOfUsersLastCommitOnRepo":
                         {
+                            if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
                             var time = "";
                             gitbotResponse = ($"{time} is when {user} last commited on {repoOwner}/{repoName}.");
                         }
                         break;
                     case "numberOfCommitsByUserOnRepo":
                         {
+                            if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
                             var total = "";
                             gitbotResponse = ($"{user} has made {total} commits on {repoOwner}/{repoName}.");
                         }
                         break;
                     case "lastNumberOfCommitsByUser":
                         {
+                            if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
                             var commits = "";
                             gitbotResponse = ($"Here are the last {number} commits by {user} on {repoOwner}/{repoName}:{commits}.");
                         }
                         break;
                     case "usersBiography":
                         {
+                            if (user == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a user."); break; }
                             var u = await github.User.Get(user);
                             gitbotResponse = ($"{user}'s biography is \"{u.Bio}\".");
                         }
                         break;
                     case "usersEmail":
                         {
+                            if (user == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a user."); break; }
                             var u = await github.User.Get(user);
                             gitbotResponse = ($"{user}'s email address is \"{u.Email}\".");
                         }
                         break;
                     case "usersName":
                         {
+                            if (user == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a user."); break; }
                             var u = await github.User.Get(user);
                             gitbotResponse = ($"{user}'s name is \"{u.Name}\".");
                         }
                         break;
                     case "usersProfileLink":
                         {
+                            if (user == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a user."); break; }
                             var u = await github.User.Get(user);
                             gitbotResponse = ($"Here's a link to {user}'s profile: {u.HtmlUrl}");
                         }
                         break;
                     case "usersLocation":
                         {
+                            if (user == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a user."); break; }
                             var u = await github.User.Get(user);
                             gitbotResponse = ($"{user}'s location is \"{u.Location}\".");
                         }
                         break;
                     case "usersFollowerCount":
                         {
+                            if (user == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a user."); break; }
                             var u = await github.User.Get(user);
                             gitbotResponse = ($"{user} has {u.Followers} followers.");
                         }
                         break;
                     case "usersFollowingCount":
                         {
+                            if (user == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a user."); break; }
                             var u = await github.User.Get(user);
                             gitbotResponse = ($"{user} is following {u.Following} users.");
                         }
                         break;
                     case "noOfWatchersOfRepo":
                         {
+                            if (user == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a user."); break; }
                             var watchers = await github.Activity.Watching.GetAllWatchers(repoOwner, repoName);
                             gitbotResponse = ($"Watchers are {watchers.Count}");
                         }
                         break;
                     case "usersStarsCount":
                         {
+                            if (user == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a user."); break; }
                             var repos = await github.Activity.Starring.GetAllForUser(user);
                             gitbotResponse = ($"{user} has starred {repos.Count} repos");
                         }
                         break;
                     case "usersRepositories":
                         {
+                            if (user == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a user."); break; }
                             var repos = await github.Repository.GetAllForUser("nating");
                             var count = repos.Count;
                             gitbotResponse = ($"Here are {user}'s repositories:  \n");
@@ -332,6 +358,7 @@ namespace Bot_Application1
                         break;
                     case "usersRepositoryCount":
                         {
+                            if (user == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a user."); break; }
                             var repos = await github.Repository.GetAllForUser("nating");
                             gitbotResponse = ($"{user} has {repos.Count} repositories.");
                         }
@@ -388,7 +415,7 @@ namespace Bot_Application1
         }
 
         //Takes the text from a LUIS response and returns the value the top scoring intent as a string if present
-        //  otherwise returns "doNotKnow"
+        //  otherwise returns null
         private string getIntent(string luisText)
         {
             JObject luisJson = JObject.Parse(luisText);
@@ -397,11 +424,11 @@ namespace Bot_Application1
                 //Needs to be updated to include a test to see if score is above a threshold
                 return luisJson["topScoringIntent"]["intent"].ToString();
             }
-            return "doNotKnow";
+            return null;
         }
 
         //Takes the text from a LUIS response and returns the value of the first user entity if present
-        //  Otherwise returns "doNotKnow"
+        //  Otherwise returns null
         private string getUser(string luisText)
         {
             JObject luisJson = JObject.Parse(luisText);
@@ -416,11 +443,11 @@ namespace Bot_Application1
                     }
                 }
             }
-            return "doNotKnow";
+            return null;
         }
 
         //Takes the text from a LUIS response and returns the value of the first repoOwner entity if present
-        //  Otherwise returns "doNotKnow"
+        //  Otherwise returns null
         private string getRepoOwner(string luisText)
         {
             JObject luisJson = JObject.Parse(luisText);
@@ -435,11 +462,11 @@ namespace Bot_Application1
                     }
                 }
             }
-            return "doNotKnow";
+            return null;
         }
 
         //Takes the text from a LUIS response and returns the value of the first repoName entity if present
-        //  Otherwise returns "doNotKnow"
+        //  Otherwise returns null
         private string getRepoName(string luisText)
         {
             JObject luisJson = JObject.Parse(luisText);
@@ -454,11 +481,11 @@ namespace Bot_Application1
                     }
                 }
             }
-            return "doNotKnow";
+            return null;
         }
 
         //Takes the text from a LUIS response and returns the value of the first number entity if present
-        //  Otherwise returns "doNotKnow"
+        //  Otherwise returns null
         private string getNumber(string luisText)
         {
             JObject luisJson = JObject.Parse(luisText);
@@ -473,7 +500,7 @@ namespace Bot_Application1
                     }
                 }
             }
-            return "doNotKnow";
+            return null;
         }
     }
 }
