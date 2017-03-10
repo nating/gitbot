@@ -90,12 +90,12 @@ namespace Bot_Application1
                 switch (intent)
                 {
                     
-                    /*case "lastCommitOnRepo":
+                    case "lastCommitOnRepo":
                         {
                             var commits = await github.Repository.Commit.Get(repoOwner, repoName, "master");
                             gitbotResponse = ($"The last commit was at {commits.Commit.Committer.Date.TimeOfDay} on {commits.Commit.Committer.Date.Day}/{commits.Commit.Committer.Date.Month}/{commits.Commit.Committer.Date.Year} by {commits.Commit.Author.Name}: \"{commits.Commit.Message}\"");
                         }
-                        break;*/
+                        break;
                     case "timeOfLastCommitOnRepo":
                         {
                             if(repoOwner==null){ gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
@@ -124,8 +124,8 @@ namespace Bot_Application1
                         break;
 
                     // for testing change case to lastCommitOnRepo and comment that out
-                    //case "lastNCommits":
-                    case "lastCommitOnRepo":
+                    case "lastNCommits":
+                   // case "lastCommitOnRepo":
                         {
                             if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
                             var commits = await github.Repository.Commit.GetAll(repoOwner, repoName);
