@@ -363,6 +363,14 @@ namespace Bot_Application1
                             gitbotResponse = ($"{user} has {repos.Count} repositories.");
                         }
                         break;
+                    case "linkToRepo":
+                        {
+                            if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
+                            var repo = await github.Repository.Get(repoOwner, repoName);
+                            gitbotResponse = ($"Here is the URL for {repoOwner}/{repoName}: {repo.HtmlUrl}");
+
+                        }
+                        break;
                     case "help":
                         {
                             gitbotResponse = ($"You can ask me anything about information on GitHub!  \nHere's the type of questions that you can ask me: https://github.com/nating/gitbot/wiki/Questions");
