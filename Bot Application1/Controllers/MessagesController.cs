@@ -54,7 +54,8 @@ namespace Bot_Application1
                 var user = getUser(luisText);
                 var repoOwner = getRepoOwner(luisText);
                 var repoName = getRepoName(luisText);
-                var number = getNumber(luisText);
+                var num = getNumber(luisText);
+                int number = Int32.Parse(num);
 
                 // Sample decoding of message while LUIS not up and running
                 /*
@@ -134,7 +135,7 @@ namespace Bot_Application1
                             var previousCommiter = "";
 
                             /*int i should instead be the number LUIS found*/
-                            for (int i = 0; i < 60; i++)
+                            for (int i = 0; i < number; i++)
                             {
                                 previousCommits = commits.ElementAt(i).Commit.Message;  // for ElementAt() index 0 = most recent commit
                                 previousCommiter = commits.ElementAt(i).Commit.Author.Name;
@@ -367,7 +368,7 @@ namespace Bot_Application1
                         {
                             if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
                             var repo = await github.Repository.Get(repoOwner, repoName);
-                            gitbotResponse = ($"Here is the URL for {repoOwner}/{repoName}: {repo.HtmlUrl}");
+                            gitbotResponse = ($"Here is the link to {repoOwner}/{repoName}: {repo.HtmlUrl}");
 
                         }
                         break;
