@@ -10,7 +10,7 @@ The LUIS Model column describes which LUIS Model the question is sent to to dete
 |How many contributors does `<repo>` have?			    |❌			      |✅           |✅
 |How many files are in `<repo>`?						        |❌			      |✅           |✅
 |How many watchers on `<repo>`?			                |❌            |✅           |✅
-|What's the link to `<repo>`?		                    |❌            |❌           |❌
+|What's the link to `<repo>`?		                    |❌            |✅           |❌
 
 ## Commits
 
