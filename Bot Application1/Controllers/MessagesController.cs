@@ -54,8 +54,7 @@ namespace Bot_Application1
                 var user = getUser(luisText);
                 var repoOwner = getRepoOwner(luisText);
                 var repoName = getRepoName(luisText);
-                var num = getNumber(luisText);
-                int number = Int32.Parse(num);
+                var number = getNumber(luisText);
 
                 // Sample decoding of message while LUIS not up and running
                 /*
@@ -135,7 +134,7 @@ namespace Bot_Application1
                             var previousCommiter = "";
 
                             /*int i should instead be the number LUIS found*/
-                            for (int i = 0; i < number; i++)
+                            for (int i = 0; i < 5; i++)
                             {
                                 previousCommits = commits.ElementAt(i).Commit.Message;  // for ElementAt() index 0 = most recent commit
                                 previousCommiter = commits.ElementAt(i).Commit.Author.Name;
@@ -152,13 +151,12 @@ namespace Bot_Application1
                         {
                             if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
                             var commits = await github.Repository.Commit.GetAll(repoOwner, repoName);
-                            var User = "Shane Carmody";
                             int i = 0;
-                            while (!String.Equals(commits.ElementAt(i).Commit.Author.Name, User, StringComparison.Ordinal))
+                            while (!String.Equals(commits.ElementAt(i).Commit.Author.Name, user, StringComparison.Ordinal))
                             {
                                 i++;
                             }
-                            gitbotResponse = ($"The last commit by {User} was \"{commits.ElementAt(i).Commit.Message}\" ");
+                            gitbotResponse = ($"The last commit by {user} was \"{commits.ElementAt(i).Commit.Message}\" ");
                         }
                         break;
 
