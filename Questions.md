@@ -19,7 +19,7 @@ The LUIS Model column describes which LUIS Model the question is sent to to dete
 |What was the last commit on `<repo>`?				      |✅            |✅           |✅
 |When was the last commit on `<repo>`?				      |✅			      |✅           |✅
 |How many total commits are there on `<repo>`?		  |❌			      |✅           |❌
-|What were the last `<number>` commits on `<repo>`? |✅			      |✅           |❌
+|What were the last `<number>` commits on `<repo>`? |✅			      |✅           |✅
 |What was `<user>`’s last commit on `<repo>`?			  |❌			      |✅           |✅
 |When was `<user>`’s last commit on `<repo>`?			  |❌			      |✅           |✅
 |How many commits has `<user>` made on `<repo>`?		|❌			      |✅           |✅
