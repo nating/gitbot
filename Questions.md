@@ -17,7 +17,7 @@ The LUIS Model column describes which LUIS Model the question is sent to to dete
 |Questions											                    |LUIS Taught  |Code Written	|In Wiki 
 |---------------------------------------------------|--------------|-------------|---
 |What was the last commit on `<repo>`?				      |✅            |✅           |✅
-|When was the last commit on `<repo>`?				      |✅			      |✅           |❌
+|When was the last commit on `<repo>`?				      |✅			      |✅           |✅
 |How many total commits are there on `<repo>`?		  |❌			      |✅           |❌
 |What were the last `<number>` commits on `<repo>`? |✅			      |✅           |❌
 |What was `<user>`’s last commit on `<repo>`?			  |❌			      |✅           |✅
