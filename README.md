@@ -1,6 +1,6 @@
 # GitBot - The GitHub Chatbot
 
-<img src="https://github.com/nating/gitbot/blob/master/assets/gitbot-inverted.png" width="300">
+<img src="https://github.com/nating/gitbot/blob/master/assets/gitbot-inverted-black.png" width="300">
 
 GitBot is a chatbot that is able to answer questions about information from GitHub.
 

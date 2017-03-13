@@ -1,0 +1,14 @@
+﻿<Properties StartupConfiguration="{A8BA1066-5695-4D71-ABB4-65E5A5E0C3D4}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Bot Application1/Controllers/MessagesController.cs">
+    <Files>
+      <File FileName="Bot Application1/Controllers/MessagesController.cs" Line="26" Column="5" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Bot_220Application1 PreferredExecutionTarget="MonoDevelop.Default" />
+  <MultiItemStartupConfigurations />
+</Properties>
