@@ -368,7 +368,13 @@ namespace Bot_Application1
                             if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
                             var fork = await github.Repository.Forks.GetAll(repoOwner, repoName);
                             gitbotResponse = ($"There are {fork.Count} defined for the repository");
-
+                        }
+                        break;
+                    case "noOfBranchesOfRepo":
+                        {
+                            if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
+                            var branch = await github.Repository.Branch.GetAll(repoOwner, repoName);
+                            gitbotResponse = ($"There are {branch.Count} branches in the repository");
                         }
                         break;
                     case "help":
