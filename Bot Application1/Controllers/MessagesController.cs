@@ -242,7 +242,7 @@ namespace Bot_Application1
                         {
                             if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
                             var commits = await github.Repository.Commit.Get(repoOwner, repoName, "master");
-                            gitbotResponse = ($"The last person to commit on {repoOwner}/{repoName} was {commits.Commit.Author.Name} a.k.a. {commits.Author.Login}");
+                            gitbotResponse = ($"The last person to commit on {repoOwner}/{repoName} was {commits.Commit.Author.Name}");
                         }
                         break;
                     case "lastNumberOfCommitsOnRepo":
