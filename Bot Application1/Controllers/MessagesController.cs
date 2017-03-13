@@ -182,8 +182,9 @@ namespace Bot_Application1
                             var commits = await github.Repository.Commit.GetAll(repoOwner, repoName);
                             int noOfCommits = commits.Count;
                             int count = 0;
+                            var u = await github.User.Get(user);
                             for (int i = 0; i < noOfCommits; i++)
-                                if (String.Equals(commits.ElementAt(i).Author.Login, user, StringComparison.Ordinal))
+                                if (String.Equals(commits.ElementAt(i).Commit.Author.Name, u.name, StringComparison.Ordinal))
                                     count++;
 
                             if (count == 1)
