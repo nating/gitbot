@@ -3,6 +3,7 @@ body {
   background-color: #3A96DD;
   margin: 0px;
   padding: 10px;
+  height: 100vh;
 }
 
 #header {
@@ -14,14 +15,13 @@ body {
 
 #header-content {
   width: 200px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: auto;
 }
 
 #gitbot-logo {
   height: 50px;
   display: block;
-  float: left;
+  display: inline;
 }
 
 span {
@@ -29,6 +29,10 @@ span {
   font-size: 30px;
   color: #FFFFFF;
   font-family: Verdana, sans;
+  display: inline;
+  position: relative;
+  top: -13px;
+  left: 2px;
 }
 
 #chatbox {
@@ -38,4 +42,5 @@ span {
   margin-right: auto;
   background-color: #FFFFFF;
   border: none;
+  height: 80%;
 }
