@@ -180,18 +180,17 @@ namespace Bot_Application1
                         {
                             if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
                             var commits = await github.Repository.Commit.GetAll(repoOwner, repoName);
-                            var User = "Geoffrey Natin";
                             int noOfCommits = commits.Count;
                             int count = 0;
                             for (int i = 0; i < noOfCommits; i++)
-                                if (String.Equals(commits.ElementAt(i).Commit.Author.Name, User, StringComparison.Ordinal))
+                                if (String.Equals(commits.ElementAt(i).Author.Login, user, StringComparison.Ordinal))
                                     count++;
 
                             if (count == 1)
-                                gitbotResponse = ($"{User} has made {count} commit to {repoOwner}/{repoName}");
+                                gitbotResponse = ($"{user} has made {count} commit to {repoOwner}/{repoName}");
 
                             else
-                                gitbotResponse = ($"{User} has made {count} commits to {repoOwner}/{repoName}");
+                                gitbotResponse = ($"{user} has made {count} commits to {repoOwner}/{repoName}");
                         }
                         break;
 
@@ -264,13 +263,6 @@ namespace Bot_Application1
                             if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
                             var time = "";
                             gitbotResponse = ($"{time} is when {user} last commited on {repoOwner}/{repoName}.");
-                        }
-                        break;
-                    case "numberOfCommitsByUserOnRepo":
-                        {
-                            if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
-                            var total = "";
-                            gitbotResponse = ($"{user} has made {total} commits on {repoOwner}/{repoName}.");
                         }
                         break;
                     case "lastNumberOfCommitsByUser":
