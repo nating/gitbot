@@ -363,6 +363,14 @@ namespace Bot_Application1
 
                         }
                         break;
+                    case "noOfForksOfRepo":
+                        {
+                            if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
+                            var fork = await github.Repository.Forks.GetAll(repoOwner, repoName);
+                            gitbotResponse = ($"There are {fork.Count} defined for the repository");
+
+                        }
+                        break;
                     case "help":
                         {
                             gitbotResponse = ($"You can ask me anything about information on GitHub!  \nHere's the type of questions that you can ask me: https://github.com/nating/gitbot/wiki/Questions");
