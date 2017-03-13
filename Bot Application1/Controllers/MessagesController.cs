@@ -152,7 +152,7 @@ namespace Bot_Application1
                             if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
                             var commits = await github.Repository.Commit.GetAll(repoOwner, repoName);
                             int i = 0;
-                            while (!String.Equals(commits.ElementAt(i).Commit.Author.Name, user, StringComparison.Ordinal))
+                            while (!String.Equals(commits.ElementAt(i).Author.Login, user, StringComparison.Ordinal))
                             {
                                 i++;
                             }
