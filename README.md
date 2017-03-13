@@ -1,12 +1,12 @@
 # GitBot - The GitHub Chatbot
 
-<img src="https://github.com/nating/gitbot/blob/master/assets/gitbot-inverted-black.png" width="300">
+<img src="https://github.com/nating/gitbot/blob/master/docs/assets/gitbot-inverted-black.png" width="300">
 
 GitBot is a chatbot that is able to answer questions about information from GitHub.
 
 ## How to interact with GitBot
 
-<img src="https://github.com/nating/gitbot/blob/master/assets/gitbot-demo.gif" width="900">
+<img src="https://github.com/nating/gitbot/blob/master/docs/assets/gitbot-demo.gif" width="900">
 
 Once GitBot is published, you can simply send him a message from one of the supported platforms.
 
@@ -16,7 +16,7 @@ GitBot is not yet published.
 
 ## How GitBot Works
 
-<img src="https://github.com/nating/gitbot/blob/master/assets/gitbot-explanation.png" width="900">
+<img src="https://github.com/nating/gitbot/blob/master/docs/assets/gitbot-explanation.png" width="900">
 
 GitBot is a chatbot built with the [Microsoft Bot Framework](https://dev.botframework.com/) and is hosted on [Azure](https://azure.microsoft.com/).  
 
