@@ -13,6 +13,16 @@ The LUIS Model column describes which LUIS Model the question is sent to to dete
 |What's the link to `<repo>`?		                    |✅            |✅           |✅
 |How many forks defined for `<repo>`?		            |✅            |✅           |✅
 |How many branches in `<repo>`?		                  |✅            |✅           |✅
+|Which branch of `<repo>` has the latest commit?    |❌            |❌           |❌
+|Who commits the most on `<repo>`?                  |❌            |❌           |❌
+|Who commits the least on `<repo>`?                 |❌            |❌           |❌
+|Who commits the latest on `<repo>`?                |❌            |❌           |❌
+|Who commits the earliest on `<repo>`?              |❌            |❌           |❌
+|What time do users usually commit on `<repo>`?     |❌            |❌           |❌
+
+
+what time does tiarnan usually commit
+how many commits did nating make yesterday
 
 ## Commits
 
@@ -38,16 +48,20 @@ The LUIS Model column describes which LUIS Model the question is sent to to dete
 
 |Questions											                    |LUIS Taught|Code Written	 |In Wiki
 |---------------------------------------------------|-----------|--------------|---
-|What is `<user>`'s biography?					            |✅          |✅            |✅
-|What is `<user>`'s email address?			            |✅          |✅            |✅
-|How many followers does `<user>` have?	            |✅          |✅            |✅
-|How many users is `<user>` following?	            |✅          |✅            |✅
-|Where is `<user>`'s location?					            |✅          |✅            |✅
-|What is `<user>`'s name?								            |✅          |✅            |✅
-|What repositories does `<user>` own?			          |✅          |✅            |✅
-|How many repositories does `<user>` own?			      |✅          |✅            |✅
-|How many repositories has `<user>` starred?			  |✅          |✅            |✅
-|What's the link to `<user>`'s profile?		          |✅          |✅            |✅
+|What is `<user>`'s biography?					                          |✅          |✅            |✅
+|What is `<user>`'s email address?			                          |✅          |✅            |✅
+|How many followers does `<user>` have?	                          |✅          |✅            |✅
+|How many users is `<user>` following?	                          |✅          |✅            |✅
+|Where is `<user>`'s location?					                          |✅          |✅            |✅
+|What is `<user>`'s name?								                          |✅          |✅            |✅
+|What repositories does `<user>` own?			                        |✅          |✅            |✅
+|How many repositories does `<user>` own?			                    |✅          |✅            |✅
+|How many repositories has `<user>` starred?			                |✅          |✅            |✅
+|What's the link to `<user>`'s profile?		                        |✅          |✅            |✅
+|How many commits did `<user>` make yesterday?                    |❌          |❌            |❌
+|How many commits has `<user>` made in the past `<time period>`?  |❌          |❌            |❌
+|How many commits has `<user>` made?                              |❌          |❌            |❌
+|What time does `<user>` usually commit?                          |❌          |❌            |❌
 
 ## Miscellaneous
 
