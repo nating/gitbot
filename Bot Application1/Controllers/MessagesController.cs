@@ -82,13 +82,24 @@ namespace Bot_Application1
 
                 var github = new GitHubClient(new ProductHeaderValue("GitBot"));
                 var gitbotResponse = "";
-                var theRepo = github.Repository.Get("nating","gitbot");
+                var URL = ""; //default error image
+
+             
 
                 /*---------------------------------SWITCH ON INTENT----------------------------------------*/
 
                 //Switch on intent of message to get different data from github
                 switch (intent)
                 {
+                    
+                    case "usersProfilePic":
+                        {
+                            if(user == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a user."); break; }
+                            gitbotResponse = ($"{user}'s Avatar:");
+                            var u = await github.User.Get(user);
+                            URL = u.AvatarUrl;
+                        }
+                        break;
                     
                     case "lastCommitOnRepo":
                         {
@@ -111,7 +122,6 @@ namespace Bot_Application1
 
                         }
                         break;
-                    //Not Yet Implemented on LUIS
 
                     case "lastCommiter":
                         {
@@ -125,7 +135,6 @@ namespace Bot_Application1
 
                     // for testing change case to lastCommitOnRepo and comment that out
                     case "lastNCommits":
-                   // case "lastCommitOnRepo":
                         {
                             if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
                             var commits = await github.Repository.Commit.GetAll(repoOwner, repoName);
@@ -147,7 +156,7 @@ namespace Bot_Application1
                         break;
 
                     /* again LUIS should interperate the user, hardcoded for now*/
-                    case "usersLastCommit": //test last commit by Shane(SCarmo)
+                    case "usersLastCommit":
                         {
                             if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
                             var commits = await github.Repository.Commit.GetAll(repoOwner, repoName);
@@ -392,8 +401,15 @@ namespace Bot_Application1
 
                 /*-----------------------------------RESPOND TO CLIENT-------------------------------------*/
 
-                // Return our reply to the user
                 Microsoft.Bot.Connector.Activity reply = activity.CreateReply($"{gitbotResponse}");
+                reply.Attachments = new List<Attachment>();  // Initilise attachment arrayList
+                reply.Attachments.Add(new Attachment()
+                {
+                    ContentUrl = URL,
+                    ContentType = "image/png",
+                    Name = "reply_image.png"
+                });
+                // Return our reply to the user
                 await connector.Conversations.ReplyToActivityAsync(reply);
             }
             else
