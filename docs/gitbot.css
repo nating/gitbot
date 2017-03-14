@@ -24,8 +24,9 @@ body {
   display: inline;
 }
 
-span {
+a {
   text-align: left;
+  text-decoration: none;
   font-size: 30px;
   color: #FFFFFF;
   font-family: Verdana, sans;
