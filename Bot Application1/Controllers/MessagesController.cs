@@ -54,7 +54,10 @@ namespace Bot_Application1
                 var user = getUser(luisText);
                 var repoOwner = getRepoOwner(luisText);
                 var repoName = getRepoName(luisText);
-                var number = getNumber(luisText);
+                var num = getNumber(luisText);
+                int number = 0;
+                if(num != null)
+                    number =Int32.Parse(num);
 
                 // Sample decoding of message while LUIS not up and running
                 /*
@@ -82,7 +85,8 @@ namespace Bot_Application1
 
                 var github = new GitHubClient(new ProductHeaderValue("GitBot"));
                 var gitbotResponse = "";
-                var URL = ""; //default error image
+                var URL = "";
+                var failURL = "https://media.tenor.co/images/0a4f3a8c6a64f71e726924746fb5c8ab/raw";
 
              
 
@@ -94,7 +98,11 @@ namespace Bot_Application1
                     
                     case "usersProfilePic":
                         {
-                            if(user == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a user."); break; }
+                            if(user == null) {
+                                gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a user.");
+                                URL = failURL;
+                                break;
+                            }
                             gitbotResponse = ($"{user}'s Avatar:");
                             var u = await github.User.Get(user);
                             URL = u.AvatarUrl;
@@ -142,17 +150,20 @@ namespace Bot_Application1
                             var noOfCommits = commits.Count;
                             var previousCommits = "";
                             var previousCommiter = "";
-
-                            /*int i should instead be the number LUIS found*/
-                            for (int i = 0; i < 5; i++)
+                            if (number < commits.Count)
                             {
-                                previousCommits = commits.ElementAt(i).Commit.Message;  // for ElementAt() index 0 = most recent commit
-                                previousCommiter = commits.ElementAt(i).Commit.Author.Name;
-                                if (i == 0)
-                                    gitbotResponse += ($"\nCommit #{noOfCommits}, The last commit was by {previousCommiter}. \"{previousCommits}\" \n");
-                                else
-                                    gitbotResponse += ($"\nCommit #{noOfCommits - i} was by {previousCommiter}. \"{previousCommits}\" \n");
+                                for (int i = 0; i < number; i++)
+                                {
+                                    previousCommits = commits.ElementAt(i).Commit.Message;  // for ElementAt() index 0 = most recent commit
+                                    previousCommiter = commits.ElementAt(i).Commit.Author.Name;
+                                    if (i == 0)
+                                        gitbotResponse += ($"\nCommit #{noOfCommits}, The last commit was by {previousCommiter}. \"{previousCommits}\" \n");
+                                    else
+                                        gitbotResponse += ($"\nCommit #{noOfCommits - i} was by {previousCommiter}. \"{previousCommits}\" \n");
+                                }
                             }
+                            else
+                                gitbotResponse = ($"Ah here, theres not that many commits now!");
                         }
                         break;
 
@@ -175,13 +186,12 @@ namespace Bot_Application1
                         {
                             if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
                             var commits = await github.Repository.Commit.GetAll(repoOwner, repoName);
-                            var User = "Shane Carmody";
                             int i = 0;
-
-                            while (!String.Equals(commits.ElementAt(i).Commit.Author.Name, User, StringComparison.Ordinal))
+                            var u = await github.User.Get(user);
+                            while (!String.Equals(commits.ElementAt(i).Commit.Author.Name, u.Name, StringComparison.Ordinal))
                                 i++;
 
-                            gitbotResponse = ($"The last commit time by {User} was at {commits.ElementAt(i).Commit.Committer.Date.TimeOfDay} on {commits.ElementAt(i).Commit.Committer.Date.Day}/{commits.ElementAt(i).Commit.Committer.Date.Month}/{commits.ElementAt(i).Commit.Committer.Date.Year}.");
+                            gitbotResponse = ($"The last commit time by {user} was at {commits.ElementAt(i).Commit.Committer.Date.TimeOfDay} on {commits.ElementAt(i).Commit.Committer.Date.Day}/{commits.ElementAt(i).Commit.Committer.Date.Month}/{commits.ElementAt(i).Commit.Committer.Date.Year}.");
                         }
                         break;
 
@@ -208,22 +218,28 @@ namespace Bot_Application1
                     case "usersLastNCommits":
                         {
                             if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
-                            var User = "Geoff Natin";
-                            var lastNCommits = 2;
-                            gitbotResponse = ($"{User}'s last {lastNCommits} commits were:\n");
-                            //int[] indexArray = new int[lastNCommits];
+                            gitbotResponse = ($"{user}'s last {number} commits were:\n");
                             var commits = await github.Repository.Commit.GetAll(repoOwner, repoName);
+                            var u = await github.User.Get(user);
                             int index = 0;
                             int count = 0; // keep count of commits by user  
-                            while (count < lastNCommits)
+                            if(number > commits.Count)
                             {
-                                if (String.Equals(commits.ElementAt(index).Commit.Author.Name, User, StringComparison.Ordinal))
+                                while (count < number)
                                 {
-                                    count++;
-                                    gitbotResponse += ($"\n\"{commits.ElementAt(index).Commit.Message}\" \n");
+                                    if (String.Equals(commits.ElementAt(index).Commit.Author.Name, u.Name, StringComparison.Ordinal))
+                                    {
+                                        count++;
+                                        gitbotResponse += ($"\n\"{commits.ElementAt(index).Commit.Message}\" \n");
+                                    }
+                                    index++;
                                 }
-                                index++;
                             }
+                            else
+                            {
+                                gitbotResponse = ("Ah here, there's not that many commits now!");
+                            }
+                            
 
 
                         }
@@ -287,7 +303,10 @@ namespace Bot_Application1
                         {
                             if (user == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a user."); break; }
                             var u = await github.User.Get(user);
-                            gitbotResponse = ($"{user}'s biography is \"{u.Bio}\".");
+                            if (u.Bio != null)
+                                gitbotResponse = ($"{user}'s biography is \"{u.Bio}\".");
+                            else
+                                gitbotResponse = ($"Sorry but {user} has no biography :(");
                         }
                         break;
                     case "usersEmail":
@@ -301,7 +320,10 @@ namespace Bot_Application1
                         {
                             if (user == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a user."); break; }
                             var u = await github.User.Get(user);
-                            gitbotResponse = ($"{user}'s name is \"{u.Name}\".");
+                            if (u.Name != null)
+                                gitbotResponse = ($"{user}'s name is \"{u.Name}\".");
+                            else
+                                gitbotResponse = ($"Sorry but {user} has no name :");
                         }
                         break;
                     case "usersProfileLink":
@@ -315,7 +337,10 @@ namespace Bot_Application1
                         {
                             if (user == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a user."); break; }
                             var u = await github.User.Get(user);
-                            gitbotResponse = ($"{user}'s location is \"{u.Location}\".");
+                            if (u.Location != null)
+                                gitbotResponse = ($"{user}'s location is \"{u.Location}\".");
+                            else
+                                gitbotResponse = ($"Sorry but {user} has no location :(");
                         }
                         break;
                     case "usersFollowerCount":
@@ -411,13 +436,26 @@ namespace Bot_Application1
                 /*-----------------------------------RESPOND TO CLIENT-------------------------------------*/
 
                 Microsoft.Bot.Connector.Activity reply = activity.CreateReply($"{gitbotResponse}");
-                reply.Attachments = new List<Attachment>();  // Initilise attachment arrayList
-                reply.Attachments.Add(new Attachment()
+                if(URL == failURL){
+                    reply.Attachments = new List<Attachment>();  // Initilise attachment arrayList
+                    reply.Attachments.Add(new Attachment()
+                    {
+                        ContentUrl = URL,
+                        ContentType = "image/gif",
+                        Name = "reply_image.gif"
+                    });
+                }
+                if(URL != "")
                 {
-                    ContentUrl = URL,
-                    ContentType = "image/png",
-                    Name = "reply_image.png"
-                });
+                    reply.Attachments = new List<Attachment>();  // Initilise attachment arrayList
+                    reply.Attachments.Add(new Attachment()
+                    {
+                        ContentUrl = URL,
+                        ContentType = "image/png",
+                        Name = "reply_image.png"
+                    });
+                }
+                
                 // Return our reply to the user
                 await connector.Conversations.ReplyToActivityAsync(reply);
             }
@@ -449,7 +487,7 @@ namespace Bot_Application1
             }
             else if (message.Type == ActivityTypes.Typing)
             {
-                Console.Write("hi");
+                
             }
             else if (message.Type == ActivityTypes.Ping)
             {
@@ -538,7 +576,7 @@ namespace Bot_Application1
             {
                 for (var i = 0; i < entities.Count; i++)
                 {
-                    if (entities[i]["type"].ToString().Equals("number"))
+                    if (entities[i]["type"].ToString().Equals("num"))
                     {
                         return entities[i]["entity"].ToString();
                     }
