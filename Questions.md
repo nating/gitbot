@@ -62,6 +62,7 @@ how many commits did nating make yesterday
 |How many commits has `<user>` made in the past `<time period>`?  |❌          |❌            |❌
 |How many commits has `<user>` made?                              |❌          |❌            |❌
 |What time does `<user>` usually commit?                          |❌          |❌            |❌
+|When was the `<user>`'s profile created?		                      |❌          |✅            |❌
 
 ## Miscellaneous
 
