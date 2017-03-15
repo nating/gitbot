@@ -348,7 +348,7 @@ namespace Bot_Application1
                     case "usersRepositories":
                         {
                             if (user == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a user."); break; }
-                            var repos = await github.Repository.GetAllForUser("nating");
+                            var repos = await github.Repository.GetAllForUser(user);
                             var count = repos.Count;
                             gitbotResponse = ($"Here are {user}'s repositories:  \n");
                             for (int i = 0; i < count; i++)
@@ -384,6 +384,13 @@ namespace Bot_Application1
                             if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
                             var branch = await github.Repository.Branch.GetAll(repoOwner, repoName);
                             gitbotResponse = ($"There are {branch.Count} branches in the repository");
+                        }
+                        break;
+                    case "dateAndTimeAccountCreated":
+                        {
+                            var u = await github.User.Get(user);
+                            gitbotResponse = ($"The account {user} was created at\n");
+                            gitbotResponse = ($"{u.CreatedAt}");
                         }
                         break;
                     case "help":
