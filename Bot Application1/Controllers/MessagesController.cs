@@ -23,11 +23,12 @@ namespace Bot_Application1
         {
             if (activity.Type == ActivityTypes.Message)
             {
+
                 ConnectorClient connector = new ConnectorClient(new Uri(activity.ServiceUrl));
 
                 /*-----------------------------------ASK LUIS-----------------------------------------------*/
                 // <-- PUT AN ASTERISK IN BETWEEN THESE SLASHES IF TESTING WITHOUT LUIS
-              
+
                 var luisText = "";
 
                 var query = Uri.EscapeDataString(activity.Text);
@@ -36,7 +37,7 @@ namespace Bot_Application1
                     string RequestURI = "https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/560dcd08-17ab-433c-af87-c1f9790e2df2?subscription-key=d083a35e1b8c47138a0249785069b387&verbose=true&q=" + query;
                     HttpResponseMessage msg = await client.GetAsync(RequestURI);
 
-                    if ((int)msg.StatusCode==200)
+                    if ((int)msg.StatusCode == 200)
                     {
                         luisText = await msg.Content.ReadAsStringAsync();
                     }
@@ -56,8 +57,8 @@ namespace Bot_Application1
                 var repoName = getRepoName(luisText);
                 var num = getNumber(luisText);
                 int number = 0;
-                if(num != null)
-                    number =Int32.Parse(num);
+                if (num != null)
+                    number = Int32.Parse(num);
 
                 // Sample decoding of message while LUIS not up and running
                 /*
@@ -88,46 +89,74 @@ namespace Bot_Application1
                 var URL = "";
                 var failURL = "https://media.tenor.co/images/0a4f3a8c6a64f71e726924746fb5c8ab/raw";
 
-             
-
                 /*---------------------------------SWITCH ON INTENT----------------------------------------*/
 
                 //Switch on intent of message to get different data from github
                 switch (intent)
                 {
-                    
+
                     case "usersProfilePic":
                         {
-                            if(user == null) {
+                            if (user == null)
+                            {
                                 gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a user.");
                                 URL = failURL;
                                 break;
                             }
-                            gitbotResponse = ($"{user}'s Avatar:");
-                            var u = await github.User.Get(user);
-                            URL = u.AvatarUrl;
+                            try
+                            {
+                                gitbotResponse = ($"{user}'s Avatar:");
+                                var u = await github.User.Get(user);
+                                URL = u.AvatarUrl;
+                            }
+                            catch
+                            {
+                                gitbotResponse = ($"Sorry the user \"{user}\" does not exist");
+                            }
+
                         }
                         break;
-                    
+
                     case "lastCommitOnRepo":
                         {
                             if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
-                            var commits = await github.Repository.Commit.Get(repoOwner, repoName, "master");
-                            gitbotResponse = ($"The last commit was at {commits.Commit.Committer.Date.TimeOfDay} on {commits.Commit.Committer.Date.Day}/{commits.Commit.Committer.Date.Month}/{commits.Commit.Committer.Date.Year} by {commits.Commit.Author.Name}: \"{commits.Commit.Message}\"");
+                            try
+                            {
+                                var commits = await github.Repository.Commit.Get(repoOwner, repoName, "master");
+                                gitbotResponse = ($"The last commit was at {commits.Commit.Committer.Date.TimeOfDay} on {commits.Commit.Committer.Date.Day}/{commits.Commit.Committer.Date.Month}/{commits.Commit.Committer.Date.Year} by {commits.Commit.Author.Name}: \"{commits.Commit.Message}\"");
+                            }
+                            catch
+                            {
+                                gitbotResponse = ($"the repository \"{repoOwner}/{repoName}\" does not exist.");
+                            }
                         }
                         break;
                     case "timeOfLastCommitOnRepo":
                         {
-                            if(repoOwner==null){ gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
-                            var commits = await github.Repository.Commit.Get(repoOwner, repoName, "master");
-                            gitbotResponse = ($"The last commit on {repoOwner}/{repoName}/master was made at {commits.Commit.Committer.Date.TimeOfDay} on {commits.Commit.Committer.Date.Day}/{commits.Commit.Committer.Date.Month}/{commits.Commit.Committer.Date.Year}.");
+                            if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
+                            try
+                            {
+                                var commits = await github.Repository.Commit.Get(repoOwner, repoName, "master");
+                                gitbotResponse = ($"The last commit on {repoOwner}/{repoName}/master was made at {commits.Commit.Committer.Date.TimeOfDay} on {commits.Commit.Committer.Date.Day}/{commits.Commit.Committer.Date.Month}/{commits.Commit.Committer.Date.Year}.");
+                            }
+                            catch
+                            {
+                                gitbotResponse = ($"the repository \"{repoOwner}/{repoName}\" does not exist.");
+                            }
                         }
                         break;
                     case "totalCommitsOnRepo":
                         {
                             if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
-                            var commits = await github.Repository.Commit.GetAll(repoOwner, repoName);
-                            gitbotResponse = ($"There has been {commits.Count} commits on {repoOwner}/{repoName}.");
+                            try
+                            {
+                                var commits = await github.Repository.Commit.GetAll(repoOwner, repoName);
+                                gitbotResponse = ($"There has been {commits.Count} commits on {repoOwner}/{repoName}.");
+                            }
+                            catch
+                            {
+                                gitbotResponse = ($"the repository \"{repoOwner}/{repoName}\" does not exist.");
+                            }
 
                         }
                         break;
@@ -135,10 +164,17 @@ namespace Bot_Application1
                     case "lastCommiter":
                         {
                             if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
-                            var commits = await github.Repository.Commit.GetAll(repoOwner, repoName);
-                            gitbotResponse = ($"The last commit was made by {commits.ElementAt(0).Commit.Author.Name} \n");
-                            gitbotResponse += ($"\nUsername: {commits.ElementAt(0).Author.Login} \n");
-                            gitbotResponse += ($"\nEmail: {commits.ElementAt(0).Commit.Author.Email} \n");
+                            try
+                            {
+                                var commits = await github.Repository.Commit.GetAll(repoOwner, repoName);
+                                gitbotResponse = ($"The last commit was made by {commits.ElementAt(0).Commit.Author.Name} \n");
+                                gitbotResponse += ($"\nUsername: {commits.ElementAt(0).Author.Login} \n");
+                                gitbotResponse += ($"\nEmail: {commits.ElementAt(0).Commit.Author.Email} \n");
+                            }
+                            catch
+                            {
+                                gitbotResponse = ("An invalid user or repo was entered.");
+                            }
                         }
                         break;
 
@@ -146,24 +182,31 @@ namespace Bot_Application1
                     case "lastNCommits":
                         {
                             if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
-                            var commits = await github.Repository.Commit.GetAll(repoOwner, repoName);
-                            var noOfCommits = commits.Count;
-                            var previousCommits = "";
-                            var previousCommiter = "";
-                            if (number < commits.Count)
+                            try
                             {
-                                for (int i = 0; i < number; i++)
+                                var commits = await github.Repository.Commit.GetAll(repoOwner, repoName);
+                                var noOfCommits = commits.Count;
+                                var previousCommits = "";
+                                var previousCommiter = "";
+                                if (number < commits.Count)
                                 {
-                                    previousCommits = commits.ElementAt(i).Commit.Message;  // for ElementAt() index 0 = most recent commit
-                                    previousCommiter = commits.ElementAt(i).Commit.Author.Name;
-                                    if (i == 0)
-                                        gitbotResponse += ($"\nCommit #{noOfCommits}, The last commit was by {previousCommiter}. \"{previousCommits}\" \n");
-                                    else
-                                        gitbotResponse += ($"\nCommit #{noOfCommits - i} was by {previousCommiter}. \"{previousCommits}\" \n");
+                                    for (int i = 0; i < number; i++)
+                                    {
+                                        previousCommits = commits.ElementAt(i).Commit.Message;  // for ElementAt() index 0 = most recent commit
+                                        previousCommiter = commits.ElementAt(i).Commit.Author.Name;
+                                        if (i == 0)
+                                            gitbotResponse += ($"\nCommit #{noOfCommits}, The last commit was by {previousCommiter}. \"{previousCommits}\" \n");
+                                        else
+                                            gitbotResponse += ($"\nCommit #{noOfCommits - i} was by {previousCommiter}. \"{previousCommits}\" \n");
+                                    }
                                 }
+                                else
+                                    gitbotResponse = ($"Ah here, theres not that many commits now!");
                             }
-                            else
-                                gitbotResponse = ($"Ah here, theres not that many commits now!");
+                            catch
+                            {
+                                gitbotResponse = ("A user or repo was typed incorrectly.");
+                            }
                         }
                         break;
 
@@ -171,13 +214,23 @@ namespace Bot_Application1
                     case "usersLastCommit":
                         {
                             if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
-                            var commits = await github.Repository.Commit.GetAll(repoOwner, repoName);
-                            int i = 0;
-                            while (!String.Equals(commits.ElementAt(i).Author.Login, user, StringComparison.Ordinal))
+                            try
                             {
-                                i++;
+                                var commits = await github.Repository.Commit.GetAll(repoOwner, repoName);
+                                int i = 0;
+                                while (!String.Equals(commits.ElementAt(i).Author.Login, user, StringComparison.Ordinal) && i < commits.Count)
+                                {
+                                    i++;
+                                }
+                                if (i != 0)
+                                    gitbotResponse = ($"The last commit by {user} was \"{commits.ElementAt(i).Commit.Message}\".");
+                                else
+                                    gitbotResponse = ($"{user} has no commits on {repoOwner}/{repoName}.");
                             }
-                            gitbotResponse = ($"The last commit by {user} was \"{commits.ElementAt(i).Commit.Message}\" ");
+                            catch
+                            {
+                                gitbotResponse = ("The user or repository entered is not valid.");
+                            }
                         }
                         break;
 
@@ -185,13 +238,23 @@ namespace Bot_Application1
                     case "timeOfUsersLastCommit":
                         {
                             if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
-                            var commits = await github.Repository.Commit.GetAll(repoOwner, repoName);
-                            int i = 0;
-                            var u = await github.User.Get(user);
-                            while (!String.Equals(commits.ElementAt(i).Commit.Author.Name, u.Name, StringComparison.Ordinal))
-                                i++;
-
-                            gitbotResponse = ($"The last commit time by {user} was at {commits.ElementAt(i).Commit.Committer.Date.TimeOfDay} on {commits.ElementAt(i).Commit.Committer.Date.Day}/{commits.ElementAt(i).Commit.Committer.Date.Month}/{commits.ElementAt(i).Commit.Committer.Date.Year}.");
+                            try
+                            {
+                                var commits = await github.Repository.Commit.GetAll(repoOwner, repoName);
+                                int i = 0;
+                                var u = await github.User.Get(user);
+                                var name = u.Name;
+                                while (!String.Equals(commits.ElementAt(i).Commit.Author.Name, name, StringComparison.Ordinal))
+                                    i++;
+                                if (i != 0)
+                                    gitbotResponse = ($"The last commit time by {user} was at {commits.ElementAt(i).Commit.Committer.Date.TimeOfDay} on {commits.ElementAt(i).Commit.Committer.Date.Day}/{commits.ElementAt(i).Commit.Committer.Date.Month}/{commits.ElementAt(i).Commit.Committer.Date.Year}.");
+                                else
+                                    gitbotResponse = ($"The user has no commits on the repo");
+                            }
+                            catch
+                            {
+                                gitbotResponse = ("Invalid user or repo entered.");
+                            }
                         }
                         break;
 
@@ -199,19 +262,27 @@ namespace Bot_Application1
                     case "noOfUserCommits":
                         {
                             if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
-                            var commits = await github.Repository.Commit.GetAll(repoOwner, repoName);
-                            int noOfCommits = commits.Count;
-                            int count = 0;
-                            var u = await github.User.Get(user);
-                            for (int i = 0; i < noOfCommits; i++)
-                                if (String.Equals(commits.ElementAt(i).Commit.Author.Name, u.Name, StringComparison.Ordinal))
-                                    count++;
+                            try
+                            {
+                                var commits = await github.Repository.Commit.GetAll(repoOwner, repoName);
+                                int noOfCommits = commits.Count;
+                                int count = 0;
+                                var u = await github.User.Get(user);
+                                var name = u.Name;
+                                for (int i = 0; i < noOfCommits; i++)
+                                    if (String.Equals(commits.ElementAt(i).Commit.Author.Name, name, StringComparison.Ordinal))
+                                        count++;
 
-                            if (count == 1)
-                                gitbotResponse = ($"{user} has made {count} commit to {repoOwner}/{repoName}");
+                                if (count == 1)
+                                    gitbotResponse = ($"{user} has made {count} commit to {repoOwner}/{repoName}");
 
-                            else
-                                gitbotResponse = ($"{user} has made {count} commits to {repoOwner}/{repoName}");
+                                else
+                                    gitbotResponse = ($"{user} has made {count} commits to {repoOwner}/{repoName}");
+                            }
+                            catch
+                            {
+                                gitbotResponse = ("FAIL!!!!");
+                            }
                         }
                         break;
 
@@ -219,58 +290,123 @@ namespace Bot_Application1
                         {
                             if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
                             gitbotResponse = ($"{user}'s last {number} commits were:\n");
+
+                            // check valid repo
+                            try
+                            {
+                                var check = await github.Repository.Commit.GetAll(repoOwner, repoName);
+                            }
+                            catch
+                            {
+                                gitbotResponse = ($"The repository \"{repoOwner}/{repoName}\" does not exist");
+                                break;
+                            }
+
+                            // check valid user
+                            try
+                            {
+                                var check2 = await github.User.Get(user);
+                            }
+                            catch
+                            {
+                                gitbotResponse = ($"\"{user}\" is not a user");
+                                break;
+                            }
+
                             var commits = await github.Repository.Commit.GetAll(repoOwner, repoName);
                             var u = await github.User.Get(user);
                             int index = 0;
+                            int otherIndex = 0;
                             int count = 0; // keep count of commits by user  
-                            if(number < commits.Count)
+                            bool commited = false; // user has commited at all to repo?
+                            var name = u.Name;
+                            // check if {user} has any commits on given repo
+                            while (!commited && otherIndex < commits.Count)
                             {
-                                while (count < number)
+                                if (String.Equals(commits.ElementAt(otherIndex).Commit.Author.Name, name, StringComparison.Ordinal))
+                                    commited = true;
+                                otherIndex++;
+                            }
+
+                            if (commited)
+                            {
+                                if (number < commits.Count)
                                 {
-                                    if (String.Equals(commits.ElementAt(index).Commit.Author.Name, u.Name, StringComparison.Ordinal))
+                                    while (count < number)
                                     {
-                                        count++;
-                                        gitbotResponse += ($"\n\"{commits.ElementAt(index).Commit.Message}\" \n");
+                                        if (String.Equals(commits.ElementAt(index).Commit.Author.Name, name, StringComparison.Ordinal))
+                                        {
+                                            count++;
+                                            gitbotResponse += ($"\n\"{commits.ElementAt(index).Commit.Message}\" \n");
+                                        }
+                                        index++;
                                     }
-                                    index++;
+                                }
+                                else
+                                {
+                                    gitbotResponse = ($"There is only {commits.Count} total commits on {repoOwner}/{repoName}.");
                                 }
                             }
                             else
                             {
-                                gitbotResponse = ("Ah here, there's not that many commits now!");
+                                gitbotResponse = ($"The user \"{user}\" has not commited to {repoOwner}/{repoName}");
                             }
-                            
-
-
                         }
                         break;
+
+
                     case "numberOfContributorsOnRepo":
                         {
                             if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
-                            var contributors = await github.Repository.GetAllContributors(repoOwner, repoName);
-                            if (contributors.Count > 1)
-                                gitbotResponse = ($"There are {contributors.Count} contributors in {repoName} repo.");
-                            else
-                                gitbotResponse = ($"There is {contributors.Count} contributor in {repoName} repo.");
+                            try
+                            {
+                                var contributors = await github.Repository.GetAllContributors(repoOwner, repoName);
+                                if (contributors.Count > 1)
+                                    gitbotResponse = ($"There are {contributors.Count} contributors in {repoName} repo.");
+                                else
+                                    gitbotResponse = ($"There is {contributors.Count} contributor in {repoName} repo.");
+                            }
+                            catch
+                            {
+                                gitbotResponse = ($"The repo \"{repoOwner}/{repoName}\" does not exist");
+                            }
                         }
                         break;
                     case "numberOfFilesInRepo":
                         {
                             if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
-                            var contents = await github.Repository.Content.GetAllContents(repoOwner, repoName);
-                            if (contents.Count > 1)
-                                gitbotResponse = ($"There are {contents.Count} files in {repoName} repo.");
-                            else
-                                gitbotResponse = ($"There is {contents.Count} file in {repoName} repo.");
+                            try
+                            {
+                                var contents = await github.Repository.Content.GetAllContents(repoOwner, repoName);
+                                if (contents.Count > 1)
+                                    gitbotResponse = ($"There are {contents.Count} files in {repoName} repo.");
+                                else
+                                    gitbotResponse = ($"There is {contents.Count} file in {repoName} repo.");
+                            }
+                            catch
+                            {
+                                gitbotResponse = ($"The repo \"{repoOwner}/{repoName}\" does not exist");
+                            }
                         }
                         break;
                     case "lastPersonToCommitOnRepo":
                         {
                             if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
-                            var commits = await github.Repository.Commit.Get(repoOwner, repoName, "master");
-                            gitbotResponse = ($"The last person to commit on {repoOwner}/{repoName} was {commits.Commit.Author.Name}");
+                            try
+                            {
+                                var commits = await github.Repository.Commit.Get(repoOwner, repoName, "master");
+                                gitbotResponse = ($"The last person to commit on {repoOwner}/{repoName} was {commits.Commit.Author.Name}");
+                            }
+                            catch
+                            {
+                                gitbotResponse = ($"The repo \"{repoOwner}/{repoName}\" does not exist");
+                            }
                         }
                         break;
+
+
+                    /* are these not already implemented??? */
+                    //--------------------------------------------------------------------------------------------------------------------------
                     case "lastNumberOfCommitsOnRepo":
                         {
                             if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
@@ -292,132 +428,239 @@ namespace Bot_Application1
                             gitbotResponse = ($"{time} is when {user} last commited on {repoOwner}/{repoName}.");
                         }
                         break;
-                    case "lastNumberOfCommitsByUser":
-                        {
-                            if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
-                            var commits = "";
-                            gitbotResponse = ($"Here are the last {number} commits by {user} on {repoOwner}/{repoName}:{commits}.");
-                        }
-                        break;
+                    //--------------------------------------------------------------------------------------------------------------------------
+
+
                     case "usersBiography":
                         {
                             if (user == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a user."); break; }
-                            var u = await github.User.Get(user);
-                            if (u.Bio != null)
-                                gitbotResponse = ($"{user}'s biography is \"{u.Bio}\".");
-                            else
-                                gitbotResponse = ($"Sorry but {user} has no biography :(");
+                            try
+                            {
+                                var u = await github.User.Get(user);
+                                if (u.Bio != null)
+                                {
+                                    gitbotResponse = ($"{user}'s biography is \"{u.Bio}\".");
+                                }
+                                else
+                                    gitbotResponse = ($"{user} has no biography.");
+                            }
+                            catch
+                            {
+                                gitbotResponse = ($"Sorry but \"{user}\" is not a user.");
+                            }
                         }
                         break;
                     case "usersEmail":
                         {
-                            if (user == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a user."); break; }
-                            var u = await github.User.Get(user);
-                            gitbotResponse = ($"{user}'s email address is \"{u.Email}\".");
+                            try
+                            {
+                                if (user == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a user."); break; }
+                                var u = await github.User.Get(user);
+                                if (u.Email != null)
+                                    gitbotResponse = ($"{user}'s email address is \"{u.Email}\".");
+                                else
+                                    gitbotResponse = ($"The user : {user} does not display their email.");
+                            }
+                            catch
+                            {
+                                gitbotResponse = ($"Sorry but \"{user}\" is not a user.");
+                            }
                         }
                         break;
                     case "usersName":
                         {
                             if (user == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a user."); break; }
-                            var u = await github.User.Get(user);
-                            if (u.Name != null)
-                                gitbotResponse = ($"{user}'s name is \"{u.Name}\".");
-                            else
-                                gitbotResponse = ($"Sorry but {user} has no name :");
+                            try
+                            {
+                                var u = await github.User.Get(user);
+                                if (u.Name != null)
+                                    gitbotResponse = ($"{user}'s name is \"{u.Name}\".");
+                                else
+                                    gitbotResponse = ($"\"{user}\" does not display their name.");
+                            }
+                            catch
+                            {
+                                gitbotResponse = ($"The user \"{user}\", does not exist.");
+                            }
                         }
                         break;
                     case "usersProfileLink":
                         {
                             if (user == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a user."); break; }
-                            var u = await github.User.Get(user);
-                            gitbotResponse = ($"Here's a link to {user}'s profile: {u.HtmlUrl}");
+                            try
+                            {
+                                var u = await github.User.Get(user);
+                                gitbotResponse = ($"Here's a link to {user}'s profile: {u.HtmlUrl}");
+                            }
+                            catch
+                            {
+                                gitbotResponse = ($"\"{user}\" is not a user.");
+                            }
                         }
                         break;
                     case "usersLocation":
                         {
                             if (user == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a user."); break; }
-                            var u = await github.User.Get(user);
-                            if (u.Location != null)
-                                gitbotResponse = ($"{user}'s location is \"{u.Location}\".");
-                            else
-                                gitbotResponse = ($"Sorry but {user} has no location :(");
+
+                            try
+                            {
+                                var u = await github.User.Get(user);
+                                if (u.Location != null)
+                                    gitbotResponse = ($"{user}'s location is \"{u.Location}\".");
+                                else
+                                    gitbotResponse = ($"Sorry but {user} has no location :(");
+                            }
+                            catch
+                            {
+                                gitbotResponse = ($"The user \"{user}\" does not exist.");
+                            }
                         }
                         break;
                     case "usersFollowerCount":
                         {
                             if (user == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a user."); break; }
-                            var u = await github.User.Get(user);
-                            gitbotResponse = ($"{user} has {u.Followers} followers.");
+                            try
+                            {
+                                var u = await github.User.Get(user);
+                                gitbotResponse = ($"{user} has {u.Followers} followers.");
+                            }
+                            catch
+                            {
+                                gitbotResponse = ($"\"{user}\" is not a valid username.");
+                            }
                         }
                         break;
                     case "usersFollowingCount":
                         {
                             if (user == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a user."); break; }
-                            var u = await github.User.Get(user);
-                            gitbotResponse = ($"{user} is following {u.Following} users.");
+                            try
+                            {
+                                var u = await github.User.Get(user);
+                                gitbotResponse = ($"{user} is following {u.Following} users.");
+                            }
+                            catch
+                            {
+                                gitbotResponse = ($"User:{user} does not exist.");
+                            }
                         }
                         break;
                     case "noOfWatchersOfRepo":
                         {
                             if (user == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a user."); break; }
-                            var watchers = await github.Activity.Watching.GetAllWatchers(repoOwner, repoName);
-                            gitbotResponse = ($"Watchers are {watchers.Count}");
+                            try
+                            {
+                                var watchers = await github.Activity.Watching.GetAllWatchers(repoOwner, repoName);
+                                gitbotResponse = ($"Watchers are {watchers.Count}");
+                            }
+                            catch
+                            {
+                                gitbotResponse = ($"User:{user} does not exist.");
+                            }
                         }
                         break;
                     case "usersStarsCount":
                         {
                             if (user == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a user."); break; }
-                            var repos = await github.Activity.Starring.GetAllForUser(user);
-                            gitbotResponse = ($"{user} has starred {repos.Count} repos");
+                            try
+                            {
+                                var repos = await github.Activity.Starring.GetAllForUser(user);
+                                gitbotResponse = ($"{user} has starred {repos.Count} repos");
+                            }
+                            catch
+                            {
+                                gitbotResponse = ($"User:{user} does not exist.");
+                            }
                         }
                         break;
                     case "usersRepositories":
                         {
                             if (user == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a user."); break; }
-                            var repos = await github.Repository.GetAllForUser(user);
-                            var count = repos.Count;
-                            gitbotResponse = ($"Here are {user}'s repositories:  \n");
-                            for (int i = 0; i < count; i++)
+
+                            try
                             {
-                                gitbotResponse += ($"\"{repos.ElementAt(i).Name}\"  \n");
+                                var repos = await github.Repository.GetAllForUser(user);
+                                var count = repos.Count;
+                                gitbotResponse = ($"Here are {user}'s repositories:  \n");
+                                for (int i = 0; i < count; i++)
+                                {
+                                    gitbotResponse += ($"\"{repos.ElementAt(i).Name}\"  \n");
+                                }
+                            }
+                            catch
+                            {
+                                gitbotResponse = ($"User:{user} does not exist.");
                             }
                         }
                         break;
                     case "usersRepositoryCount":
                         {
                             if (user == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a user."); break; }
-                            var repos = await github.Repository.GetAllForUser("nating");
-                            gitbotResponse = ($"{user} has {repos.Count} repositories.");
+                            try
+                            {
+                                var repos = await github.Repository.GetAllForUser(user);
+                                gitbotResponse = ($"{user} has {repos.Count} repositories.");
+                            }
+                            catch
+                            {
+                                gitbotResponse = ($"User:{user} does not exist.");
+                            }
                         }
                         break;
                     case "linkToRepo":
                         {
                             if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
-                            var repo = await github.Repository.Get(repoOwner, repoName);
-                            gitbotResponse = ($"Here is the link to {repoOwner}/{repoName}: {repo.HtmlUrl}");
-
+                            try
+                            {
+                                var repo = await github.Repository.Get(repoOwner, repoName);
+                                gitbotResponse = ($"Here is the link to {repoOwner}/{repoName}: {repo.HtmlUrl}");
+                            }
+                            catch
+                            {
+                                gitbotResponse = ($"The repo \"{repoOwner}/{repoName}\" is not a valid repo");
+                            }
                         }
                         break;
                     case "noOfForksOfRepo":
                         {
                             if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
-                            var fork = await github.Repository.Forks.GetAll(repoOwner, repoName);
-                            gitbotResponse = ($"There are {fork.Count} defined for the repository");
+                            try
+                            {
+                                var fork = await github.Repository.Forks.GetAll(repoOwner, repoName);
+                                gitbotResponse = ($"There are {fork.Count} defined for the repository");
+                            }
+                            catch
+                            {
+                                gitbotResponse = ($"The repo \"{repoOwner}/{repoName}\" does not exist");
+                            }
                         }
                         break;
                     case "noOfBranchesOfRepo":
                         {
                             if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
-                            var branch = await github.Repository.Branch.GetAll(repoOwner, repoName);
-                            gitbotResponse = ($"There are {branch.Count} branches in the repository");
+                            try
+                            {
+                                var branch = await github.Repository.Branch.GetAll(repoOwner, repoName);
+                                gitbotResponse = ($"There are {branch.Count} branches in the repository");
+                            }
+                            catch
+                            {
+                                gitbotResponse = ($"The repo \"{repoOwner}/{repoName}\" is non-existant");
+                            }
                         }
                         break;
                     case "dateAndTimeAccountCreated":
                         {
                             if (user == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a user."); break; }
-                            var u = await github.User.Get(user);
-                            gitbotResponse = ($"The account {user} was created at\n");
-                            gitbotResponse = ($"{u.CreatedAt}");
+                            try
+                            {
+                                var u = await github.User.Get(user);
+                                gitbotResponse = ($"The account {user} was created at\n");
+                                gitbotResponse = ($"{u.CreatedAt}");
+                            }
+                            catch
+                            {
+                                gitbotResponse = ($"The user \"{user}\" does not exist.");
+                            }
                         }
                         break;
                     case "help":
@@ -436,7 +679,8 @@ namespace Bot_Application1
                 /*-----------------------------------RESPOND TO CLIENT-------------------------------------*/
 
                 Microsoft.Bot.Connector.Activity reply = activity.CreateReply($"{gitbotResponse}");
-                if(URL == failURL){
+                if (URL == failURL)
+                {
                     reply.Attachments = new List<Attachment>();  // Initilise attachment arrayList
                     reply.Attachments.Add(new Attachment()
                     {
@@ -445,7 +689,7 @@ namespace Bot_Application1
                         Name = "reply_image.gif"
                     });
                 }
-                if(URL != "")
+                if (URL != "")
                 {
                     reply.Attachments = new List<Attachment>();  // Initilise attachment arrayList
                     reply.Attachments.Add(new Attachment()
@@ -455,7 +699,7 @@ namespace Bot_Application1
                         Name = "reply_image.png"
                     });
                 }
-                
+
                 // Return our reply to the user
                 await connector.Conversations.ReplyToActivityAsync(reply);
             }
@@ -487,7 +731,7 @@ namespace Bot_Application1
             }
             else if (message.Type == ActivityTypes.Typing)
             {
-                
+
             }
             else if (message.Type == ActivityTypes.Ping)
             {
