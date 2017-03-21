@@ -223,7 +223,7 @@ namespace Bot_Application1
                             var u = await github.User.Get(user);
                             int index = 0;
                             int count = 0; // keep count of commits by user  
-                            if(number > commits.Count)
+                            if(number < commits.Count)
                             {
                                 while (count < number)
                                 {
