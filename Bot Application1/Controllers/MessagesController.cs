@@ -447,6 +447,7 @@ namespace Bot_Application1
                             catch
                             {
                                 gitbotResponse = ($"Sorry but \"{user}\" is not a user.");
+                                URL = failURL;
                             }
                         }
                         break;
@@ -676,6 +677,16 @@ namespace Bot_Application1
                     case "thankYou":
                         {
                             gitbotResponse = ("No problem!");
+                        }
+                        break;
+                    case "greeting":
+                        {
+                            gitbotResponse = ("Hey!");
+                        }
+                        break;
+                    case "howAreYou":
+                        {
+                            gitbotResponse = ("I'm good thanks");
                         }
                         break;
                     default:
