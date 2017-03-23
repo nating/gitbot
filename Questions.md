@@ -8,11 +8,11 @@ The LUIS Model column describes which LUIS Model the question is sent to to dete
 |Questions											                    |LUIS Taught  |Code Written	|In Wiki
 |---------------------------------------------------|-------------|-------------|---
 |How many contributors does `<repo>` have?			    |✅			      |✅           |✅
-|How many files are in `<repo>`?						        |❌			      |✅           |✅
-|How many watchers on `<repo>`?			                |❌            |✅           |✅
+|How many files are in `<repo>`?						        |✅			      |✅           |✅
+|How many watchers on `<repo>`?			                |✅            |✅           |✅
 |What's the link to `<repo>`?		                    |✅            |✅           |✅
-|How many forks defined for `<repo>`?		            |❌            |✅           |✅
-|How many branches in `<repo>`?		                  |❌            |✅           |✅
+|How many forks defined for `<repo>`?		            |✅            |✅           |✅
+|How many branches in `<repo>`?		                  |✅            |✅           |✅
 |Which branch of `<repo>` has the latest commit?    |❌            |❌           |❌
 |Who commits the most on `<repo>`?                  |❌            |❌           |❌
 |Who commits the least on `<repo>`?                 |❌            |❌           |❌
