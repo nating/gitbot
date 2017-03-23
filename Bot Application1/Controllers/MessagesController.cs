@@ -546,7 +546,7 @@ namespace Bot_Application1
                         break;
                     case "noOfWatchersOfRepo":
                         {
-                            if (user == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a user."); break; }
+                            if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a user."); break; }
                             try
                             {
                                 var watchers = await github.Activity.Watching.GetAllWatchers(repoOwner, repoName);
