@@ -668,6 +668,16 @@ namespace Bot_Application1
                             gitbotResponse = ($"You can ask me anything about information on GitHub!  \nHere's the type of questions that you can ask me: https://github.com/nating/gitbot/wiki/Questions");
                         }
                         break;
+                    case "compliment":
+                        {
+                            gitbotResponse = ("Thank you!");
+                        }
+                        break;
+                    case "thankYou":
+                        {
+                            gitbotResponse = ("No problem!");
+                        }
+                        break;
                     default:
                         {
                             gitbotResponse = ("I'm sorry, I don't know what you're asking me for!  \nHere's the type of questions that you can ask me: https://github.com/nating/gitbot/wiki/Questions");
@@ -735,6 +745,7 @@ namespace Bot_Application1
             }
             else if (message.Type == ActivityTypes.Ping)
             {
+
             }
 
             return null;
