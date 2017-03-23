@@ -8,11 +8,11 @@ The LUIS Model column describes which LUIS Model the question is sent to to dete
 |Questions											                    |LUIS Taught  |Code Written	|In Wiki
 |---------------------------------------------------|-------------|-------------|---
 |How many contributors does `<repo>` have?			    |✅			      |✅           |✅
-|How many files are in `<repo>`?						        |✅			      |✅           |✅
-|How many watchers on `<repo>`?			                |✅            |✅           |✅
+|How many files are in `<repo>`?						        |❌			      |✅           |✅
+|How many watchers on `<repo>`?			                |❌            |✅           |✅
 |What's the link to `<repo>`?		                    |✅            |✅           |✅
-|How many forks defined for `<repo>`?		            |✅            |✅           |✅
-|How many branches in `<repo>`?		                  |✅            |✅           |✅
+|How many forks defined for `<repo>`?		            |❌            |✅           |✅
+|How many branches in `<repo>`?		                  |❌            |✅           |✅
 |Which branch of `<repo>` has the latest commit?    |❌            |❌           |❌
 |Who commits the most on `<repo>`?                  |❌            |❌           |❌
 |Who commits the least on `<repo>`?                 |❌            |❌           |❌
@@ -32,10 +32,10 @@ how many commits did nating make yesterday
 |When was the last commit on `<repo>`?				      |✅			      |✅           |✅
 |How many total commits are there on `<repo>`?		  |✅			      |✅           |✅
 |What were the last `<number>` commits on `<repo>`? |✅			      |✅           |✅
-|What was `<user>`’s last commit on `<repo>`?			  |✅			      |✅           |✅
-|When was `<user>`’s last commit on `<repo>`?			  |✅			      |✅           |✅
+|What was `<user>`’s last commit on `<repo>`?			  |❌			      |✅           |✅
+|When was `<user>`’s last commit on `<repo>`?			  |❌  		      |✅           |✅
 |How many commits has `<user>` made on `<repo>`?		|✅			      |✅           |✅
-|What were `<user>`’s last x commits?					      |✅			      |✅           |✅
+|What were `<user>`’s last x commits?					      |❌ 			      |✅           |✅
 |Who was the last person to commit on `<repo>`?			|✅            |✅           |✅
 
 ## Issues
