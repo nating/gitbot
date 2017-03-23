@@ -69,6 +69,6 @@ how many commits did nating make yesterday
 |Questions											                    |LUIS Taught  |Code Written	|In Wiki
 |---------------------------------------------------|-------------|-------------|---
 |Help                                      			    |✅			      |✅           |✅
-|Hello                                    			    |❌			      |❌           |❌
-|Thank you                                 			    |❌			      |❌           |❌
-|How are you?                                 			|❌			      |❌           |❌
+|Hello                                    			    |✅			      |✅           |❌
+|Thank you                                 			    |✅			      |✅           |❌
+|How are you?                                 			|✅			      |✅           |❌
