@@ -68,6 +68,6 @@ The LUIS Model column describes which LUIS Model the question is sent to to dete
 |Questions											                    |LUIS Taught  |Code Written	|In Wiki
 |---------------------------------------------------|-------------|-------------|---
 |Help                                      			    |✅			      |✅           |✅
-|Hello                                    			    |✅			      |✅           |❌
-|Thank you                                 			    |✅			      |✅           |❌
-|How are you?                                 			|✅			      |✅           |❌
+|Hello                                    			    |✅			      |✅           |✅
+|Thank you                                 			    |✅			      |✅           |✅
+|How are you?                                 			|✅			      |✅           |✅
