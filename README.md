@@ -21,7 +21,7 @@ You can simply send GitBot a message from one of the supported platforms.
 
 ## [How GitBot Works](https://github.com/nating/gitbot/wiki/How-GitBot-Works)
 
-<img src="https://github.com/nating/gitbot/blob/master/docs/assets/gitbot-explanation.png" width="900">
+[<img src="https://github.com/nating/gitbot/blob/master/docs/assets/gitbot-explanation.png" width="900">][flow]
 
 GitBot is a chatbot built with the [Microsoft Bot Framework][mbf] and is hosted on [Azure][azure].  
 
@@ -30,6 +30,7 @@ The Bot Framework connects GitBot to all of the supported messaging platforms. W
 [mbf]: https://dev.botframework.com/
 [azure]: https://azure.microsoft.com
 [luis]: https://www.microsoft.com/cognitive-services/en-us/language-understanding-intelligent-service-luis
+[flow]: https://github.com/nating/gitbot/wiki/How-GitBot-Works
 [web]: https://github.com/nating/gitbot/wiki/Talking-to-GitBot#web
 [email]: https://github.com/nating/gitbot/wiki/Talking-to-GitBot#email
 [messenger]: https://github.com/nating/gitbot/wiki/Talking-to-GitBot#facebook-messenger
