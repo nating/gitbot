@@ -4,11 +4,7 @@
 
 GitBot is a chatbot that is able to answer questions about information from GitHub.
 
-## About
-
-Everything there is to know about GitBot can be found [in his Wiki](https://github.com/nating/gitbot/wiki)!
-
-## How to interact with GitBot
+## [How to interact with GitBot](https://github.com/nating/gitbot/wiki/Talking-to-GitBot)
 
 You can simply send GitBot a message from one of the supported platforms.
 
@@ -19,7 +15,7 @@ You can simply send GitBot a message from one of the supported platforms.
 
 GitBot is not yet published.
 
-## How GitBot Works
+## [How GitBot Works](https://github.com/nating/gitbot/wiki/How-GitBot-Works)
 
 <img src="https://github.com/nating/gitbot/blob/master/docs/assets/gitbot-explanation.png" width="900">
 
