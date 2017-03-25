@@ -19,10 +19,9 @@ The LUIS Model column describes which LUIS Model the question is sent to to dete
 |Who commits the latest on `<repo>`?                |❌            |❌           |❌
 |Who commits the earliest on `<repo>`?              |❌            |❌           |❌
 |What time do users usually commit on `<repo>`?     |❌            |❌           |❌
+|What time does `<user>` usually commit on `<repo>`?|❌            |❌           |❌
+|How many commits has `<user>` made on `<repo>`?    |❌            |❌           |❌
 
-
-what time does tiarnan usually commit
-how many commits did nating make yesterday
 
 ## Commits
 
