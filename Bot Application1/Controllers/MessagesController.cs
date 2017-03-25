@@ -55,6 +55,17 @@ namespace Bot_Application1
                 var user = getUser(luisText);
                 var repoOwner = getRepoOwner(luisText);
                 var repoName = getRepoName(luisText);
+
+                // these if's remove any white space created by LUIS
+                // cause LUIS makes whitespace when you give it '-' 
+                // e.g. "The-repo", LUIS returns "the - repo" which gives errors
+                if (user != null)
+                    user = user.Replace(" ", "");
+                if (repoName != null)
+                    repoName = repoName.Replace(" ", "");
+                if (repoOwner != null)
+                    repoOwner = repoOwner.Replace(" ", "");
+
                 var num = getNumber(luisText);
                 int number = 0;
                 if (num != null)
@@ -205,7 +216,7 @@ namespace Bot_Application1
                             }
                             catch
                             {
-                                gitbotResponse = ("A user or repo was typed incorrectly.");
+                                gitbotResponse = ($"The user \"{repoOwner}\" or repo \"{repoName}\" was typed incorrectly.");
                             }
                         }
                         break;
