@@ -415,33 +415,6 @@ namespace Bot_Application1
                         }
                         break;
 
-
-                    /* are these not already implemented??? */
-                    //--------------------------------------------------------------------------------------------------------------------------
-                    case "lastNumberOfCommitsOnRepo":
-                        {
-                            if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
-                            var commits = "";
-                            gitbotResponse = ($"Here are the last {number} commits on {repoOwner}/{repoName}:{commits}");
-                        }
-                        break;
-                    case "usersLastCommitOnRepo":
-                        {
-                            if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
-                            var commit = "";
-                            gitbotResponse = ($"The last commit made by {user} on {repoOwner}/{repoName} was: {commit}");
-                        }
-                        break;
-                    case "timeOfUsersLastCommitOnRepo":
-                        {
-                            if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
-                            var time = "";
-                            gitbotResponse = ($"{time} is when {user} last commited on {repoOwner}/{repoName}.");
-                        }
-                        break;
-                    //--------------------------------------------------------------------------------------------------------------------------
-
-
                     case "usersBiography":
                         {
                             if (user == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a user."); break; }
@@ -672,6 +645,37 @@ namespace Bot_Application1
                             catch
                             {
                                 gitbotResponse = ($"The user \"{user}\" does not exist.");
+                            }
+                        }
+                        break;
+                    case "noOfPullRequestsOfRepo":
+                        {
+                            if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
+                            try
+                            {
+                                var requests = await github.Repository.PullRequest.GetAllForRepository(repoOwner, repoName);
+                                if (requests.Count > 1)
+                                    gitbotResponse = ($"There are {requests.Count} pull requests in {repoName} repo.");
+                                else
+                                    gitbotResponse = ($"There is {requests.Count} pull requests in {repoName} repo.");
+                            }
+                            catch
+                            {
+                                gitbotResponse = ($"The repo \"{repoOwner}/{repoName}\" does not exist");
+                            }
+                        }
+                        break;
+                    case "lastestPullRequestsOfRepo":
+                        {
+                            if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
+                            try
+                            {
+                                var requests = await github.Repository.PullRequest.GetAllForRepository(repoOwner, repoName);
+                                gitbotResponse = ($"The lastest pull request on {repoOwner}/{repoName} was {requests.ElementAt(0).Title}");
+                            }
+                            catch
+                            {
+                                gitbotResponse = ($"The repo \"{repoOwner}/{repoName}\" does not exist");
                             }
                         }
                         break;
