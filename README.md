@@ -12,7 +12,7 @@ You can simply send GitBot a message from one of the supported platforms.
 
 
 ## Supported Platforms
-[<img src="https://github.com/nating/gitbot/blob/master/docs/assets/platform-logos/groupme-logo.png" width="80">][groupme]
+[<img src="https://github.com/nating/gitbot/blob/master/docs/assets/platform-logos/group-me-logo.png" width="80">][groupme]
 [<img src="https://github.com/nating/gitbot/blob/master/docs/assets/platform-logos/kik-logo.png" width="80">][kik]
 [<img src="https://github.com/nating/gitbot/blob/master/docs/assets/platform-logos/messenger-logo.png" width="80">][messenger]
 [<img src="https://github.com/nating/gitbot/blob/master/docs/assets/platform-logos/microsoft-teams-logo.png" width="80">][microsoft-teams]
