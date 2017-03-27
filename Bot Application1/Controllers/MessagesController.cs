@@ -15,7 +15,6 @@ namespace Bot_Application1
     [BotAuthentication]
     public class MessagesController : ApiController
     {
-        int check = 0;
         /// <summary>
         /// POST: api/Messages
         /// Receive a message from a user and reply to it
@@ -117,7 +116,7 @@ namespace Bot_Application1
                             }
                             try
                             {
-                                gitbotResponse = ($"{user}'s Avatar: {check}");
+                                gitbotResponse = ($"{user}'s Avatar:");
                                 var u = await github.User.Get(user);
                                 URL = u.AvatarUrl;
                             }
@@ -710,10 +709,7 @@ namespace Bot_Application1
                 }
 
                 /*-----------------------------------RESPOND TO CLIENT-------------------------------------*/
-                if (activity.Type == ActivityTypes.ConversationUpdate)
-                {
-                    gitbotResponse = ("HEY!!!!!!");
-                }
+
                 Microsoft.Bot.Connector.Activity reply = activity.CreateReply($"{gitbotResponse}");
                 if (URL == failURL)
                 {
@@ -732,7 +728,7 @@ namespace Bot_Application1
                     {
                         ContentUrl = URL,
                         ContentType = "image/png",
-                        Name = "Avatar.png"
+                        Name = "reply_image.png"
                     });
                 }
 
@@ -759,9 +755,12 @@ namespace Bot_Application1
                 // Handle conversation state changes, like members being added and removed
                 // Use Activity.MembersAdded and Activity.MembersRemoved and Activity.Action for info
                 // Not available in all channels
-                var reply = message.CreateReply("You can ask me anything about information on GitHub!  \nHere's the type of questions that you can ask me: https://github.com/nating/gitbot/wiki/Questions");
-                ConnectorClient connector = new ConnectorClient(new Uri(message.ServiceUrl));
-                await connector.Conversations.ReplyToActivityAsync(reply);
+                if (message.MembersAdded.ElementAt(0).Name == "Bot")
+                {
+                    var reply = message.CreateReply("You can ask me anything about information on GitHub!  \nHere's the type of questions that you can ask me: https://github.com/nating/gitbot/wiki/Questions");
+                    ConnectorClient connector = new ConnectorClient(new Uri(message.ServiceUrl));
+                    await connector.Conversations.ReplyToActivityAsync(reply);
+                }
             }
             else if (message.Type == ActivityTypes.ContactRelationUpdate)
             {
@@ -776,6 +775,7 @@ namespace Bot_Application1
             {
 
             }
+            
         }
 
         //Takes the text from a LUIS response and returns the value the top scoring intent as a string if present
