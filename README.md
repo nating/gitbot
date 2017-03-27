@@ -12,12 +12,14 @@ You can simply send GitBot a message from one of the supported platforms.
 
 
 ## Supported Platforms
-[<img src="https://github.com/nating/gitbot/blob/master/docs/assets/platform-logos/web-logo.png" width="80">][web]
-[<img src="https://github.com/nating/gitbot/blob/master/docs/assets/platform-logos/email-logo.png" width="80">][email]
+[<img src="https://github.com/nating/gitbot/blob/master/docs/assets/platform-logos/groupme-logo.png" width="80">][groupme]
+[<img src="https://github.com/nating/gitbot/blob/master/docs/assets/platform-logos/kik-logo.png" width="80">][kik]
 [<img src="https://github.com/nating/gitbot/blob/master/docs/assets/platform-logos/messenger-logo.png" width="80">][messenger]
+[<img src="https://github.com/nating/gitbot/blob/master/docs/assets/platform-logos/microsoft-teams-logo.png" width="80">][microsoft-teams]
 [<img src="https://github.com/nating/gitbot/blob/master/docs/assets/platform-logos/skype-logo.png" width="80">][skype]
 [<img src="https://github.com/nating/gitbot/blob/master/docs/assets/platform-logos/slack-logo.png" width="80">][slack]
-[<img src="https://github.com/nating/gitbot/blob/master/docs/assets/platform-logos/sms-logo.png" width="80">][sms]
+[<img src="https://github.com/nating/gitbot/blob/master/docs/assets/platform-logos/telegram-logo.png" width="80">][telegram]
+[<img src="https://github.com/nating/gitbot/blob/master/docs/assets/platform-logos/web-logo.png" width="80">][web]
 
 ## [How GitBot Works](https://github.com/nating/gitbot/wiki/How-GitBot-Works)
 
@@ -31,9 +33,11 @@ The Bot Framework connects GitBot to all of the supported messaging platforms. W
 [azure]: https://azure.microsoft.com
 [luis]: https://www.microsoft.com/cognitive-services/en-us/language-understanding-intelligent-service-luis
 [flow]: https://github.com/nating/gitbot/wiki/How-GitBot-Works
-[web]: https://github.com/nating/gitbot/wiki/Talking-to-GitBot#web
-[email]: https://github.com/nating/gitbot/wiki/Talking-to-GitBot#email
-[messenger]: https://github.com/nating/gitbot/wiki/Talking-to-GitBot#facebook-messenger
+[groupme]: https://github.com/nating/gitbot/wiki/Talking-to-GitBot#groupme
+[kik]: https://github.com/nating/gitbot/wiki/Talking-to-GitBot#kik
+[messenger]: https://github.com/nating/gitbot/wiki/Talking-to-GitBot#messenger
+[microsoft-teams]: https://github.com/nating/gitbot/wiki/Talking-to-GitBot#microsoft-teams
 [skype]: https://github.com/nating/gitbot/wiki/Talking-to-GitBot#skype
 [slack]: https://github.com/nating/gitbot/wiki/Talking-to-GitBot#slack
-[sms]: https://github.com/nating/gitbot/wiki/Talking-to-GitBot#sms
+[telegram]: https://github.com/nating/gitbot/wiki/Talking-to-GitBot#telegram
+[web]: https://github.com/nating/gitbot/wiki/Talking-to-GitBot#web
