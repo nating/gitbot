@@ -755,7 +755,7 @@ namespace Bot_Application1
                 // Handle conversation state changes, like members being added and removed
                 // Use Activity.MembersAdded and Activity.MembersRemoved and Activity.Action for info
                 // Not available in all channels
-                if (message.MembersAdded.Count > 1)
+                if (message.From.Id == message.MembersAdded.First().Id)
                 {
                     var reply = message.CreateReply("You can ask me anything about information on GitHub!  \nHere's the type of questions that you can ask me: https://github.com/nating/gitbot/wiki/Questions");
                     ConnectorClient connector = new ConnectorClient(new Uri(message.ServiceUrl));
