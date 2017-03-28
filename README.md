@@ -1,6 +1,6 @@
 # GitBot - The GitHub Chatbot
 
-<img src="https://github.com/nating/gitbot/blob/master/docs/assets/gitbot-inverted-black.png" width="300">
+<img src="https://github.com/nating/gitbot/blob/master/docs/assets/gitbot-inverted-blue.png" width="300">
 
 GitBot is a chatbot that is able to answer questions about information from GitHub.
 
@@ -11,7 +11,7 @@ You can simply send GitBot a message from one of the supported platforms.
 <img src="https://github.com/nating/gitbot/blob/master/docs/assets/gitbot-demo.gif" width="900">
 
 
-## Supported Platforms
+## [Supported Platforms](https://github.com/nating/gitbot/wiki/Talking-to-GitBot#supported-platforms)
 [<img src="https://github.com/nating/gitbot/blob/master/docs/assets/platform-logos/group-me-logo.png" width="80">][groupme]
 [<img src="https://github.com/nating/gitbot/blob/master/docs/assets/platform-logos/kik-logo.png" width="80">][kik]
 [<img src="https://github.com/nating/gitbot/blob/master/docs/assets/platform-logos/messenger-logo.png" width="80">][messenger]
