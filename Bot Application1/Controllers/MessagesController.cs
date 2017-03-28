@@ -148,7 +148,7 @@ namespace Bot_Application1
                         {
                             if (user == null)
                             {
-                                gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a user.");
+                                gitbotResponse = ($"I think you wanted to get a users avatar but I didn't see a user.");
                                 URL = failURL;
                                 break;
                             }
@@ -161,6 +161,7 @@ namespace Bot_Application1
                             catch
                             {
                                 gitbotResponse = ($"Sorry the user \"{user}\" does not exist");
+                                URL = failURL;
                             }
 
                         }
@@ -168,25 +169,12 @@ namespace Bot_Application1
 
                     case "lastCommitOnRepo":
                         {
-                            if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
+                            if (repoOwner == null) { gitbotResponse = ($"I think you're looking for the last commit on a repo, but I didn't see a repoOwner."); break; }
+                            if (repoName == null) { gitbotResponse = ($"I think you're looking for the last commit on a repo, but I didn't see a repoName."); break; }
                             try
                             {
                                 var commits = await github.Repository.Commit.Get(repoOwner, repoName, "master");
                                 gitbotResponse = ($"The last commit was at {commits.Commit.Committer.Date.TimeOfDay} on {commits.Commit.Committer.Date.Day}/{commits.Commit.Committer.Date.Month}/{commits.Commit.Committer.Date.Year} by {commits.Commit.Author.Name}: \"{commits.Commit.Message}\"");
-                            }
-                            catch
-                            {
-                                gitbotResponse = ($"the repository \"{repoOwner}/{repoName}\" does not exist.");
-                            }
-                        }
-                        break;
-                    case "timeOfLastCommitOnRepo":
-                        {
-                            if (repoOwner == null) { gitbotResponse = ($"I think you mean \"{intent}\" but I didn't see a repoOwner."); break; }
-                            try
-                            {
-                                var commits = await github.Repository.Commit.Get(repoOwner, repoName, "master");
-                                gitbotResponse = ($"The last commit on {repoOwner}/{repoName}/master was made at {commits.Commit.Committer.Date.TimeOfDay} on {commits.Commit.Committer.Date.Day}/{commits.Commit.Committer.Date.Month}/{commits.Commit.Committer.Date.Year}.");
                             }
                             catch
                             {
@@ -755,13 +743,13 @@ namespace Bot_Application1
             }
             else
             {
-                await HandleSystemMessage(activity);
+                HandleSystemMessage(activity);
             }
             var response = Request.CreateResponse(HttpStatusCode.OK);
             return response;
         }
 
-        private async Task HandleSystemMessage(Microsoft.Bot.Connector.Activity message)
+        private Microsoft.Bot.Connector.Activity HandleSystemMessage(Microsoft.Bot.Connector.Activity message)
         {
             if (message.Type == ActivityTypes.DeleteUserData)
             {
@@ -773,12 +761,6 @@ namespace Bot_Application1
                 // Handle conversation state changes, like members being added and removed
                 // Use Activity.MembersAdded and Activity.MembersRemoved and Activity.Action for info
                 // Not available in all channels
-                if (message.From.Id == message.MembersAdded.First().Id)
-                {
-                    var reply = message.CreateReply("You can ask me anything about information on GitHub!  \nHere's the type of questions that you can ask me: https://github.com/nating/gitbot/wiki/Questions");
-                    ConnectorClient connector = new ConnectorClient(new Uri(message.ServiceUrl));
-                    await connector.Conversations.ReplyToActivityAsync(reply);
-                }
             }
             else if (message.Type == ActivityTypes.ContactRelationUpdate)
             {
@@ -793,6 +775,7 @@ namespace Bot_Application1
             {
 
             }
+            return null;
             
         }
 
