@@ -12,6 +12,8 @@ You can simply send GitBot a message from one of the supported platforms.
 
 
 ## [Supported Platforms](https://github.com/nating/gitbot/wiki/Talking-to-GitBot#supported-platforms)
+To start chatting to GitBot from one of these platforms right now, click the icon for the platform.  
+
 [<img src="https://github.com/nating/gitbot/blob/master/docs/assets/platform-logos/group-me-logo.png" width="80">][groupme]
 [<img src="https://github.com/nating/gitbot/blob/master/docs/assets/platform-logos/kik-logo.png" width="80">][kik]
 [<img src="https://github.com/nating/gitbot/blob/master/docs/assets/platform-logos/messenger-logo.png" width="80">][messenger]
@@ -33,11 +35,11 @@ The Bot Framework connects GitBot to all of the supported messaging platforms. W
 [azure]: https://azure.microsoft.com
 [luis]: https://www.microsoft.com/cognitive-services/en-us/language-understanding-intelligent-service-luis
 [flow]: https://github.com/nating/gitbot/wiki/How-GitBot-Works
-[groupme]: https://github.com/nating/gitbot/wiki/Talking-to-GitBot#groupme
+[groupme]: https://groupme.botframework.com/?botId=git-bot
 [kik]: https://github.com/nating/gitbot/wiki/Talking-to-GitBot#kik
-[messenger]: https://github.com/nating/gitbot/wiki/Talking-to-GitBot#messenger
-[microsoft-teams]: https://github.com/nating/gitbot/wiki/Talking-to-GitBot#microsoft-teams
-[skype]: https://github.com/nating/gitbot/wiki/Talking-to-GitBot#skype
+[messenger]: https://m.me/gitbot1738
+[microsoft-teams]: https://teams.microsoft.com/l/chat/0/0?users=28:ba351a4c-6fe2-4a5f-8ffa-3dedd8132a19
+[skype]: https://join.skype.com/bot/ba351a4c-6fe2-4a5f-8ffa-3dedd8132a19
 [slack]: https://github.com/nating/gitbot/wiki/Talking-to-GitBot#slack
-[telegram]: https://github.com/nating/gitbot/wiki/Talking-to-GitBot#telegram
-[web]: https://github.com/nating/gitbot/wiki/Talking-to-GitBot#web
+[telegram]: https://telegram.me/Git1_Bot
+[web]: here
