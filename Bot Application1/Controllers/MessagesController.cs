@@ -39,6 +39,15 @@ namespace Bot_Application1
                     var response17 = Request.CreateResponse(HttpStatusCode.OK);
                     return response17;
                 }
+                var githubtest = new GitHubClient(new ProductHeaderValue("GitBot"));
+                if (activity.Text.Contains("numberOfCallsLeft"))
+                {
+                    var limit = githubtest.Miscellaneous.GetRateLimits().Result;
+                    Microsoft.Bot.Connector.Activity reply38 = activity.CreateReply($"API calls left: {limit.Rate.Remaining}");
+                    await connector.Conversations.ReplyToActivityAsync(reply38);
+                    var response17 = Request.CreateResponse(HttpStatusCode.OK);
+                    return response17;
+                }
 
                 var query = Uri.EscapeDataString(activity.Text);
                 using (HttpClient client = new HttpClient())
