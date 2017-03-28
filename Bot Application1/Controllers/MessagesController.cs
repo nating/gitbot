@@ -114,7 +114,36 @@ namespace Bot_Application1
                 //Switch on intent of message to get different data from github
                 switch (intent)
                 {
-
+                    case "help":
+                        {
+                            gitbotResponse = ($"You can ask me anything about information on GitHub!  \nHere's the type of questions that you can ask me: https://github.com/nating/gitbot/wiki/Questions");
+                        }
+                        break;
+                    case "compliment":
+                        {
+                            gitbotResponse = ("Thank you!");
+                        }
+                        break;
+                    case "thankYou":
+                        {
+                            gitbotResponse = ("No problem!");
+                        }
+                        break;
+                    case "greeting":
+                        {
+                            gitbotResponse = ("Hey!");
+                        }
+                        break;
+                    case "howAreYou":
+                        {
+                            gitbotResponse = ("I'm good thanks");
+                        }
+                        break;
+                    case "curseWords":
+                        {
+                            gitbotResponse = ("Do you kiss your ma with that mouth?");
+                        }
+                        break;
                     case "usersProfilePic":
                         {
                             if (user == null)
@@ -688,31 +717,7 @@ namespace Bot_Application1
                             }
                         }
                         break;
-                    case "help":
-                        {
-                            gitbotResponse = ($"You can ask me anything about information on GitHub!  \nHere's the type of questions that you can ask me: https://github.com/nating/gitbot/wiki/Questions");
-                        }
-                        break;
-                    case "compliment":
-                        {
-                            gitbotResponse = ("Thank you!");
-                        }
-                        break;
-                    case "thankYou":
-                        {
-                            gitbotResponse = ("No problem!");
-                        }
-                        break;
-                    case "greeting":
-                        {
-                            gitbotResponse = ("Hey!");
-                        }
-                        break;
-                    case "howAreYou":
-                        {
-                            gitbotResponse = ("I'm good thanks");
-                        }
-                        break;
+                    
                     default:
                         {
                             gitbotResponse = ("I'm sorry, I don't know what you're asking me for!  \nHere's the type of questions that you can ask me: https://github.com/nating/gitbot/wiki/Questions");
