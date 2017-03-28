@@ -31,6 +31,15 @@ namespace Bot_Application1
 
                 var luisText = "";
 
+                if (activity.Text.Contains("test_1738"))
+                {
+                    var GHClientID = Environment.GetEnvironmentVariable("GITHUB_API_CLIENT_ID");
+                    Microsoft.Bot.Connector.Activity reply38 = activity.CreateReply($"GHClientID: {GHClientID}");
+                    await connector.Conversations.ReplyToActivityAsync(reply38);
+                    var response17 = Request.CreateResponse(HttpStatusCode.OK);
+                    return response17;
+                }
+
                 var query = Uri.EscapeDataString(activity.Text);
                 using (HttpClient client = new HttpClient())
                 {
