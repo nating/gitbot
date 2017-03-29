@@ -1,6 +1,6 @@
 # GitBot - The GitHub Chatbot
 
-<img src="https://github.com/nating/gitbot/blob/master/docs/assets/gitbot-inverted-blue.png" width="300">
+<img src="https://github.com/nating/gitbot/blob/master/docs/assets/gitbot-inverted-blue.png" width="200">
 
 GitBot is a chatbot that is able to answer questions about information from GitHub.
 
@@ -8,24 +8,24 @@ GitBot is a chatbot that is able to answer questions about information from GitH
 
 You can simply send GitBot a message from one of the supported platforms.
 
-<img src="https://github.com/nating/gitbot/blob/master/docs/assets/gitbot-demo.gif" width="900">
+<img src="https://github.com/nating/gitbot/blob/master/docs/assets/gitbot-demo.gif" width="600">
 
 
 ## [Supported Platforms](https://github.com/nating/gitbot/wiki/Talking-to-GitBot#supported-platforms)
 To start chatting to GitBot from one of these platforms right now, click the icon for the platform.  
 
-[<img src="https://github.com/nating/gitbot/blob/master/docs/assets/platform-logos/group-me-logo.png" width="80">][groupme]
-[<img src="https://github.com/nating/gitbot/blob/master/docs/assets/platform-logos/kik-logo.png" width="80">][kik]
-[<img src="https://github.com/nating/gitbot/blob/master/docs/assets/platform-logos/messenger-logo.png" width="80">][messenger]
-[<img src="https://github.com/nating/gitbot/blob/master/docs/assets/platform-logos/microsoft-teams-logo.png" width="80">][microsoft-teams]
-[<img src="https://github.com/nating/gitbot/blob/master/docs/assets/platform-logos/skype-logo.png" width="80">][skype]
-[<img src="https://github.com/nating/gitbot/blob/master/docs/assets/platform-logos/slack-logo.png" width="80">][slack]
-[<img src="https://github.com/nating/gitbot/blob/master/docs/assets/platform-logos/telegram-logo.png" width="80">][telegram]
-[<img src="https://github.com/nating/gitbot/blob/master/docs/assets/platform-logos/web-logo.png" width="80">][web]
+[<img src="https://github.com/nating/gitbot/blob/master/docs/assets/platform-logos/group-me-logo.png" width="60">][groupme]
+[<img src="https://github.com/nating/gitbot/blob/master/docs/assets/platform-logos/kik-logo.png" width="60">][kik]
+[<img src="https://github.com/nating/gitbot/blob/master/docs/assets/platform-logos/messenger-logo.png" width="60">][messenger]
+[<img src="https://github.com/nating/gitbot/blob/master/docs/assets/platform-logos/microsoft-teams-logo.png" width="60">][microsoft-teams]
+[<img src="https://github.com/nating/gitbot/blob/master/docs/assets/platform-logos/skype-logo.png" width="60">][skype]
+[<img src="https://github.com/nating/gitbot/blob/master/docs/assets/platform-logos/slack-logo.png" width="60">][slack]
+[<img src="https://github.com/nating/gitbot/blob/master/docs/assets/platform-logos/telegram-logo.png" width="60">][telegram]
+[<img src="https://github.com/nating/gitbot/blob/master/docs/assets/platform-logos/web-logo.png" width="60">][web]
 
 ## [How GitBot Works](https://github.com/nating/gitbot/wiki/How-GitBot-Works)
 
-[<img src="https://github.com/nating/gitbot/blob/master/docs/assets/gitbot-explanation.png" width="900">][flow]
+[<img src="https://github.com/nating/gitbot/blob/master/docs/assets/gitbot-explanation.png" width="700">][flow]
 
 GitBot is a chatbot built with the [Microsoft Bot Framework][mbf] and is hosted on [Azure][azure].  
 
