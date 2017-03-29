@@ -40,6 +40,8 @@ namespace Bot_Application1
                     return response17;
                 }
                 var githubtest = new GitHubClient(new ProductHeaderValue("GitBot"));
+                
+                
                 if (activity.Text.Contains("numberOfCallsLeft"))
                 {
                     var limit = githubtest.Miscellaneous.GetRateLimits().Result;
@@ -114,6 +116,8 @@ namespace Bot_Application1
                 */
 
                 var github = new GitHubClient(new ProductHeaderValue("GitBot"));
+                var GHPAT = Environment.GetEnvironmentVariable("GITBOT_PERSONAL_ACCESS_TOKEN");
+                github.Credentials = new Credentials(GHPAT);
                 var gitbotResponse = "";
                 var URL = "";
                 var failURL = "https://media.tenor.co/images/0a4f3a8c6a64f71e726924746fb5c8ab/raw";
