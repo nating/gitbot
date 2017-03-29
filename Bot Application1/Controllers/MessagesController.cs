@@ -45,7 +45,7 @@ namespace Bot_Application1
                 github.Credentials = new Credentials(GHPAT);
 
 
-                if (activity.Text.Contains("numberOfCallsLeft"))
+                if (activity.Text.Contains("1738test"))
                 {
                     var limit = github.Miscellaneous.GetRateLimits().Result;
                     Microsoft.Bot.Connector.Activity reply38 = activity.CreateReply($"API calls left: {limit.Rate.Remaining}");
