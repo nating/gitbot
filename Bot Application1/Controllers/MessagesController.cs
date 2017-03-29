@@ -39,12 +39,15 @@ namespace Bot_Application1
                     var response17 = Request.CreateResponse(HttpStatusCode.OK);
                     return response17;
                 }
-                var githubtest = new GitHubClient(new ProductHeaderValue("GitBot"));
-                
-                
+
+                var github = new GitHubClient(new ProductHeaderValue("GitBot"));
+                var GHPAT = Environment.GetEnvironmentVariable("GITBOT_PERSONAL_ACCESS_TOKEN");
+                github.Credentials = new Credentials(GHPAT);
+
+
                 if (activity.Text.Contains("numberOfCallsLeft"))
                 {
-                    var limit = githubtest.Miscellaneous.GetRateLimits().Result;
+                    var limit = github.Miscellaneous.GetRateLimits().Result;
                     Microsoft.Bot.Connector.Activity reply38 = activity.CreateReply($"API calls left: {limit.Rate.Remaining}");
                     await connector.Conversations.ReplyToActivityAsync(reply38);
                     var response17 = Request.CreateResponse(HttpStatusCode.OK);
@@ -115,9 +118,7 @@ namespace Bot_Application1
                 var repoName = "gitbot";
                 */
 
-                var github = new GitHubClient(new ProductHeaderValue("GitBot"));
-                var GHPAT = Environment.GetEnvironmentVariable("GITBOT_PERSONAL_ACCESS_TOKEN");
-                github.Credentials = new Credentials(GHPAT);
+                
                 var gitbotResponse = "";
                 var URL = "";
                 var failURL = "https://media.tenor.co/images/0a4f3a8c6a64f71e726924746fb5c8ab/raw";
