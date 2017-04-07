@@ -172,6 +172,10 @@ namespace Bot_Application1
                                 var u = await github.User.Get(user);
                                 URL = u.AvatarUrl;
                             }
+                            catch (RateLimitExceededException e)
+                            {
+                                gitbotResponse = ("Sorry, Gitbot is unavailable now, please try again later.");
+                            }
                             catch
                             {
                                 gitbotResponse = ($"Sorry the user \"{user}\" does not exist");
@@ -190,6 +194,10 @@ namespace Bot_Application1
                                 var commits = await github.Repository.Commit.Get(repoOwner, repoName, "master");
                                 gitbotResponse = ($"The last commit was at {commits.Commit.Committer.Date.TimeOfDay} on {commits.Commit.Committer.Date.Day}/{commits.Commit.Committer.Date.Month}/{commits.Commit.Committer.Date.Year} by {commits.Commit.Author.Name}: \"{commits.Commit.Message}\"");
                             }
+                            catch (RateLimitExceededException e)
+                            {
+                                gitbotResponse = ("Sorry, Gitbot is unavailable now, please try again later.");
+                            }
                             catch
                             {
                                 gitbotResponse = ($"the repository \"{repoOwner}/{repoName}\" does not exist.");
@@ -203,6 +211,10 @@ namespace Bot_Application1
                             {
                                 var commits = await github.Repository.Commit.GetAll(repoOwner, repoName);
                                 gitbotResponse = ($"There has been {commits.Count} commits on {repoOwner}/{repoName}.");
+                            }
+                            catch (RateLimitExceededException e)
+                            {
+                                gitbotResponse = ("Sorry, Gitbot is unavailable now, please try again later.");
                             }
                             catch
                             {
@@ -221,6 +233,10 @@ namespace Bot_Application1
                                 gitbotResponse = ($"The last commit was made by {commits.ElementAt(0).Commit.Author.Name} \n");
                                 gitbotResponse += ($"\nUsername: {commits.ElementAt(0).Author.Login} \n");
                                 gitbotResponse += ($"\nEmail: {commits.ElementAt(0).Commit.Author.Email} \n");
+                            }
+                            catch (RateLimitExceededException e)
+                            {
+                                gitbotResponse = ("Sorry, Gitbot is unavailable now, please try again later.");
                             }
                             catch
                             {
@@ -254,6 +270,10 @@ namespace Bot_Application1
                                 else
                                     gitbotResponse = ($"Ah here, theres not that many commits now!");
                             }
+                            catch (RateLimitExceededException e)
+                            {
+                                gitbotResponse = ("Sorry, Gitbot is unavailable now, please try again later.");
+                            }
                             catch
                             {
                                 gitbotResponse = ($"The user \"{repoOwner}\" or repo \"{repoName}\" was typed incorrectly.");
@@ -278,6 +298,10 @@ namespace Bot_Application1
                                 else
                                     gitbotResponse = ($"{user} has no commits on {repoOwner}/{repoName}.");
                             }
+                            catch (RateLimitExceededException e)
+                            {
+                                gitbotResponse = ("Sorry, Gitbot is unavailable now, please try again later.");
+                            }
                             catch
                             {
                                 gitbotResponse = ("The user or repository entered is not valid.");
@@ -301,6 +325,10 @@ namespace Bot_Application1
                                     gitbotResponse = ($"The last commit time by {user} was at {commits.ElementAt(i).Commit.Committer.Date.TimeOfDay} on {commits.ElementAt(i).Commit.Committer.Date.Day}/{commits.ElementAt(i).Commit.Committer.Date.Month}/{commits.ElementAt(i).Commit.Committer.Date.Year}.");
                                 else
                                     gitbotResponse = ($"The user has no commits on the repo");
+                            }
+                            catch (RateLimitExceededException e)
+                            {
+                                gitbotResponse = ("Sorry, Gitbot is unavailable now, please try again later.");
                             }
                             catch
                             {
@@ -330,6 +358,10 @@ namespace Bot_Application1
                                 else
                                     gitbotResponse = ($"{user} has made {count} commits to {repoOwner}/{repoName}");
                             }
+                            catch (RateLimitExceededException e)
+                            {
+                                gitbotResponse = ("Sorry, Gitbot is unavailable now, please try again later.");
+                            }
                             catch
                             {
                                 gitbotResponse = ("FAIL!!!!");
@@ -347,6 +379,10 @@ namespace Bot_Application1
                             {
                                 var check = await github.Repository.Commit.GetAll(repoOwner, repoName);
                             }
+                            catch (RateLimitExceededException e)
+                            {
+                                gitbotResponse = ("Sorry, Gitbot is unavailable now, please try again later.");
+                            }
                             catch
                             {
                                 gitbotResponse = ($"The repository \"{repoOwner}/{repoName}\" does not exist");
@@ -357,6 +393,10 @@ namespace Bot_Application1
                             try
                             {
                                 var check2 = await github.User.Get(user);
+                            }
+                            catch (RateLimitExceededException e)
+                            {
+                                gitbotResponse = ("Sorry, Gitbot is unavailable now, please try again later.");
                             }
                             catch
                             {
@@ -417,6 +457,10 @@ namespace Bot_Application1
                                 else
                                     gitbotResponse = ($"There is {contributors.Count} contributor in {repoName} repo.");
                             }
+                            catch (RateLimitExceededException e)
+                            {
+                                gitbotResponse = ("Sorry, Gitbot is unavailable now, please try again later.");
+                            }
                             catch
                             {
                                 gitbotResponse = ($"The repo \"{repoOwner}/{repoName}\" does not exist");
@@ -434,6 +478,10 @@ namespace Bot_Application1
                                 else
                                     gitbotResponse = ($"There is {contents.Count} file in {repoName} repo.");
                             }
+                            catch (RateLimitExceededException e)
+                            {
+                                gitbotResponse = ("Sorry, Gitbot is unavailable now, please try again later.");
+                            }
                             catch
                             {
                                 gitbotResponse = ($"The repo \"{repoOwner}/{repoName}\" does not exist");
@@ -447,6 +495,10 @@ namespace Bot_Application1
                             {
                                 var commits = await github.Repository.Commit.Get(repoOwner, repoName, "master");
                                 gitbotResponse = ($"The last person to commit on {repoOwner}/{repoName} was {commits.Commit.Author.Name}");
+                            }
+                            catch (RateLimitExceededException e)
+                            {
+                                gitbotResponse = ("Sorry, Gitbot is unavailable now, please try again later.");
                             }
                             catch
                             {
@@ -468,6 +520,10 @@ namespace Bot_Application1
                                 else
                                     gitbotResponse = ($"{user} has no biography.");
                             }
+                            catch (RateLimitExceededException e)
+                            {
+                                gitbotResponse = ("Sorry, Gitbot is unavailable now, please try again later.");
+                            }
                             catch
                             {
                                 gitbotResponse = ($"Sorry but \"{user}\" is not a user.");
@@ -486,6 +542,10 @@ namespace Bot_Application1
                                 else
                                     gitbotResponse = ($"The user : {user} does not display their email.");
                             }
+                            catch (RateLimitExceededException e)
+                            {
+                                gitbotResponse = ("Sorry, Gitbot is unavailable now, please try again later.");
+                            }
                             catch
                             {
                                 gitbotResponse = ($"Sorry but \"{user}\" is not a user.");
@@ -503,6 +563,10 @@ namespace Bot_Application1
                                 else
                                     gitbotResponse = ($"\"{user}\" does not display their name.");
                             }
+                            catch (RateLimitExceededException e)
+                            {
+                                gitbotResponse = ("Sorry, Gitbot is unavailable now, please try again later.");
+                            }
                             catch
                             {
                                 gitbotResponse = ($"The user \"{user}\", does not exist.");
@@ -516,6 +580,10 @@ namespace Bot_Application1
                             {
                                 var u = await github.User.Get(user);
                                 gitbotResponse = ($"Here's a link to {user}'s profile: {u.HtmlUrl}");
+                            }
+                            catch (RateLimitExceededException e)
+                            {
+                                gitbotResponse = ("Sorry, Gitbot is unavailable now, please try again later.");
                             }
                             catch
                             {
@@ -535,6 +603,10 @@ namespace Bot_Application1
                                 else
                                     gitbotResponse = ($"Sorry but {user} has no location :(");
                             }
+                            catch (RateLimitExceededException e)
+                            {
+                                gitbotResponse = ("Sorry, Gitbot is unavailable now, please try again later.");
+                            }
                             catch
                             {
                                 gitbotResponse = ($"The user \"{user}\" does not exist.");
@@ -548,6 +620,10 @@ namespace Bot_Application1
                             {
                                 var u = await github.User.Get(user);
                                 gitbotResponse = ($"{user} has {u.Followers} followers.");
+                            }
+                            catch (RateLimitExceededException e)
+                            {
+                                gitbotResponse = ("Sorry, Gitbot is unavailable now, please try again later.");
                             }
                             catch
                             {
@@ -563,6 +639,10 @@ namespace Bot_Application1
                                 var u = await github.User.Get(user);
                                 gitbotResponse = ($"{user} is following {u.Following} users.");
                             }
+                            catch (RateLimitExceededException e)
+                            {
+                                gitbotResponse = ("Sorry, Gitbot is unavailable now, please try again later.");
+                            }
                             catch
                             {
                                 gitbotResponse = ($"User:{user} does not exist.");
@@ -577,6 +657,10 @@ namespace Bot_Application1
                                 var watchers = await github.Activity.Watching.GetAllWatchers(repoOwner, repoName);
                                 gitbotResponse = ($"Watchers are {watchers.Count}");
                             }
+                            catch (RateLimitExceededException e)
+                            {
+                                gitbotResponse = ("Sorry, Gitbot is unavailable now, please try again later.");
+                            }
                             catch
                             {
                                 gitbotResponse = ($"User:{user} does not exist.");
@@ -590,6 +674,10 @@ namespace Bot_Application1
                             {
                                 var repos = await github.Activity.Starring.GetAllForUser(user);
                                 gitbotResponse = ($"{user} has starred {repos.Count} repos");
+                            }
+                            catch (RateLimitExceededException e)
+                            {
+                                gitbotResponse = ("Sorry, Gitbot is unavailable now, please try again later.");
                             }
                             catch
                             {
@@ -611,6 +699,10 @@ namespace Bot_Application1
                                     gitbotResponse += ($"\"{repos.ElementAt(i).Name}\"  \n");
                                 }
                             }
+                            catch (RateLimitExceededException e)
+                            {
+                                gitbotResponse = ("Sorry, Gitbot is unavailable now, please try again later.");
+                            }
                             catch
                             {
                                 gitbotResponse = ($"User:{user} does not exist.");
@@ -624,6 +716,10 @@ namespace Bot_Application1
                             {
                                 var repos = await github.Repository.GetAllForUser(user);
                                 gitbotResponse = ($"{user} has {repos.Count} repositories.");
+                            }
+                            catch (RateLimitExceededException e)
+                            {
+                                gitbotResponse = ("Sorry, Gitbot is unavailable now, please try again later.");
                             }
                             catch
                             {
@@ -639,6 +735,10 @@ namespace Bot_Application1
                                 var repo = await github.Repository.Get(repoOwner, repoName);
                                 gitbotResponse = ($"Here is the link to {repoOwner}/{repoName}: {repo.HtmlUrl}");
                             }
+                            catch (RateLimitExceededException e)
+                            {
+                                gitbotResponse = ("Sorry, Gitbot is unavailable now, please try again later.");
+                            }
                             catch
                             {
                                 gitbotResponse = ($"The repo \"{repoOwner}/{repoName}\" is not a valid repo");
@@ -652,6 +752,10 @@ namespace Bot_Application1
                             {
                                 var fork = await github.Repository.Forks.GetAll(repoOwner, repoName);
                                 gitbotResponse = ($"There are {fork.Count} defined for the repository");
+                            }
+                            catch (RateLimitExceededException e)
+                            {
+                                gitbotResponse = ("Sorry, Gitbot is unavailable now, please try again later.");
                             }
                             catch
                             {
@@ -667,6 +771,10 @@ namespace Bot_Application1
                                 var branch = await github.Repository.Branch.GetAll(repoOwner, repoName);
                                 gitbotResponse = ($"There are {branch.Count} branches in the repository");
                             }
+                            catch (RateLimitExceededException e)
+                            {
+                                gitbotResponse = ("Sorry, Gitbot is unavailable now, please try again later.");
+                            }
                             catch
                             {
                                 gitbotResponse = ($"The repo \"{repoOwner}/{repoName}\" is non-existant");
@@ -681,6 +789,10 @@ namespace Bot_Application1
                                 var u = await github.User.Get(user);
                                 gitbotResponse = ($"The account {user} was created at\n");
                                 gitbotResponse = ($"{u.CreatedAt}");
+                            }
+                            catch (RateLimitExceededException e)
+                            {
+                                gitbotResponse = ("Sorry, Gitbot is unavailable now, please try again later.");
                             }
                             catch
                             {
@@ -699,6 +811,10 @@ namespace Bot_Application1
                                 else
                                     gitbotResponse = ($"There is {requests.Count} pull requests in {repoName} repo.");
                             }
+                            catch (RateLimitExceededException e)
+                            {
+                                gitbotResponse = ("Sorry, Gitbot is unavailable now, please try again later.");
+                            }
                             catch
                             {
                                 gitbotResponse = ($"The repo \"{repoOwner}/{repoName}\" does not exist");
@@ -712,6 +828,10 @@ namespace Bot_Application1
                             {
                                 var requests = await github.Repository.PullRequest.GetAllForRepository(repoOwner, repoName);
                                 gitbotResponse = ($"The lastest pull request on {repoOwner}/{repoName} was {requests.ElementAt(0).Title}");
+                            }
+                            catch (RateLimitExceededException e)
+                            {
+                                gitbotResponse = ("Sorry, Gitbot is unavailable now, please try again later.");
                             }
                             catch
                             {
