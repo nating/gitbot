@@ -42,4 +42,4 @@ The Bot Framework connects GitBot to all of the supported messaging platforms. W
 [skype]: https://join.skype.com/bot/ba351a4c-6fe2-4a5f-8ffa-3dedd8132a19
 [slack]: https://github.com/nating/gitbot/wiki/Talking-to-GitBot#slack
 [telegram]: https://telegram.me/Git1_Bot
-[web]: here
+[web]: https://nating.github.io/gitbot
