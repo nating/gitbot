@@ -1,4 +1,5 @@
 # GitBot - The GitHub Chatbot
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
 <img src="https://github.com/nating/gitbot/blob/master/docs/assets/gitbot-inverted-blue.png" width="200">
 
